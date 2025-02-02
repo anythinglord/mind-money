@@ -2,7 +2,7 @@ import { Button } from "../../components/Button/Button";
 import { Input } from "../../components/Input/Input";
 import "./Login.css";
 
-export const Login = () => {
+const LoginPage = () => {
     return(
         <div className="root">
             <div className="card">
@@ -16,3 +16,5 @@ export const Login = () => {
         </div>
     )
 } 
+
+export default LoginPage
