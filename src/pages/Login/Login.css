@@ -9,12 +9,12 @@
 .card {
     background-color: #fff;
     height: 50vh;
-    width: 30vw;
+    width: 25vw;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 15px;
+    gap: 25px;
     border-radius: 15px;
 }
 
@@ -24,17 +24,6 @@
 }
 
 .message {
-    font-size: 12px;
+    font-size: 11px;
     color: #292929;
-}
-
-.button {
-    background-color: #087E8B;
-    border: none;
-    padding: 10px;
-    height: 45px;
-    color: #fff;
-    font-size: 15px;
-    width: 85%;
-    border-radius: 10px;
 }

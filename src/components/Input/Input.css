@@ -1,0 +1,17 @@
+.index {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 5px;
+}
+
+.label {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.input {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 10px;
+}

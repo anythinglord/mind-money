@@ -1,3 +1,5 @@
+import { Button } from "../../components/Button/Button";
+import { Input } from "../../components/Input/Input";
 import "./Login.css";
 
 export const Login = () => {
@@ -6,13 +8,9 @@ export const Login = () => {
             <div className="card">
                 <div className="title">login</div>
                 <div className="message">Enter your email and password to access your account</div>
-                Email
-                <input/>
-                Password
-                <input type="password"/>
-                <button className="button">
-                    Log in
-                </button>
+                <Input label='Email'/>
+                <Input type='password' label='password' />
+                <Button label='Log in' handleClick={() => alert('')}/>
                 <div className="message">Don't have an account? Sign up</div>
             </div>
         </div>
