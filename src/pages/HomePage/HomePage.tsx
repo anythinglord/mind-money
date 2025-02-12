@@ -23,6 +23,9 @@ const HomePage = () => {
                 </div>
                 <Avatar />
             </div>
+            <Dialog open={openDialog} setOpen={handeOpenDialog}>
+                <Creator />
+            </Dialog>
             <div className="home-content">
                 <div className="home-title">
                     Financial Summary
@@ -57,10 +60,9 @@ const HomePage = () => {
                         <div className="card-value">$6,300</div>
                     </div>
                 </div>
-                <IconButton type="plus" size="lx" handleClick={handeOpenDialog}/>
-                <Dialog open={openDialog} setOpen={handeOpenDialog}>
-                    <Creator />
-                </Dialog>
+                <div className="position-end">
+                    <IconButton type="plus" size="lx" handleClick={handeOpenDialog}/>    
+                </div>
             </div>
         </div>
     )

@@ -7,7 +7,7 @@ interface Props {
     handleClick?: () => void
 }
 
-export const IconButton = ({ type = 'plus', size = 'sx', variant = 'outlined', handleClick }: Props) => {
+export const IconButton = ({ type = 'plus', size = 'sx', variant = 'contained', handleClick }: Props) => {
     return (
         <button className={`ib-index ib-${size} ib-${variant}`} onClick={handleClick}>
             <i className={`fa-solid fa-${type}`} />

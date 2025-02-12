@@ -9,3 +9,9 @@ html, body {
   font-family: Georgia, serif; 
   font-family: Menlo, monospace; 
 }
+
+.position-end{
+  position: absolute;
+  left: calc(80vw - 2px);
+  top: calc(90vh - 2px);
+}
