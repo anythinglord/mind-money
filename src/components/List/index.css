@@ -1,0 +1,31 @@
+.list-index {
+    background-color: #fff;
+    width: 100%;
+}
+
+.list-button {
+    background-color: #fff;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    text-align: left;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    &:hover {
+        background-color: #eee;
+    }
+}
+
+.list-item {
+    padding: 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    &:hover {
+        background-color: #eee;
+    }
+}
+

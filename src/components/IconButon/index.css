@@ -1,0 +1,17 @@
+.iconb-index {
+    cursor: pointer;
+    border: 2px solid var(--main-bg-green);
+    color: var(--main-bg-green);
+    width: 42px;
+    height: 42px;
+    display: flex;
+    font-size: 24px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    &:hover{
+        background-color: var(--main-bg-green);
+        color: #fff;
+    }
+}
+
