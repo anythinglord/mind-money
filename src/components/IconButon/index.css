@@ -1,5 +1,6 @@
 .iconb-index {
     cursor: pointer;
+    background-color: transparent;
     border: 2px solid var(--main-bg-green);
     color: var(--main-bg-green);
     width: 42px;

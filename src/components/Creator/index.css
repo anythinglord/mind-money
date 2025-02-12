@@ -1,16 +1,8 @@
 .creator-index {
-    padding: 25px;
     display: flex;
     flex-direction: column;
     width: 100%;
-}
-
-.creator-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 600;
+    height: 85%;
 }
 
 .group {
@@ -21,7 +13,7 @@
 
 .creator-content {
     margin-top: 55px;
-    height: 80%;
+    height: 100%;
     display: flex;
     justify-content: space-between;
     flex-direction: column;

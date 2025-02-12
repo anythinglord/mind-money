@@ -1,13 +1,14 @@
 import "./index.css"
 
 interface Props {
-    type: string
+    type?: string
+    handleClick?: () => void
 }
 
-export const IconButton = ({ type }: Props) => {
+export const IconButton = ({ type = 'plus', handleClick }: Props) => {
     return(
-        <div className="iconb-index">
+        <button className="iconb-index" onClick={handleClick}>
             <i className={`fa-solid fa-${type}`} />
-        </div>
+        </button>
     )
 }

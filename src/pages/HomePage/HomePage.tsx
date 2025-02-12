@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { Creator } from '../../components/Creator/Creator';
 import { Dialog } from '../../components/Dialog/Dialog';
 import './HomePage.css'
+import { IconButton } from '../../components/IconButon/IconButton';
 
 const HomePage = () => {
+
+    const [openDialog, setOpenDialog] = useState(false)
+    const handeOpenDialog = () => setOpenDialog(prevState => !prevState)
     return(
         <div className='index-home'>
             <div className="navbar">
@@ -52,7 +57,8 @@ const HomePage = () => {
                         <div className="card-value">$6,300</div>
                     </div>
                 </div>
-                <Dialog>
+                <IconButton type="plus" handleClick={handeOpenDialog}/>
+                <Dialog open={openDialog} setOpen={handeOpenDialog}>
                     <Creator />
                 </Dialog>
             </div>
