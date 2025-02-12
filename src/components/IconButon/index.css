@@ -1,9 +1,8 @@
-.iconb-index {
+.ib-index {
     cursor: pointer;
     background-color: transparent;
     border: 2px solid var(--main-bg-green);
     color: var(--main-bg-green);
-    width: 42px;
     height: 42px;
     display: flex;
     font-size: 24px;
@@ -12,6 +11,31 @@
     border-radius: 8px;
     &:hover{
         background-color: var(--main-bg-green);
+        color: #fff;
+    }
+}
+
+.ib-sx {
+    width: 42px;
+}
+
+.ib-mx {
+    width: 84px;
+}
+
+.ib-lx {
+    width: 84px;
+    height: 84px;
+    border-radius: 42px;
+    font-size: 36px;
+}
+
+.ib-contained {
+    background-color: var(--main-bg-green);
+    color: #fff;
+    &:hover{
+        background-color: var(--main-bg-greeno);
+        border: 2px solid var(--main-bg-greeno);
         color: #fff;
     }
 }

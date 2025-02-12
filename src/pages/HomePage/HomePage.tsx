@@ -57,7 +57,7 @@ const HomePage = () => {
                         <div className="card-value">$6,300</div>
                     </div>
                 </div>
-                <IconButton type="plus" handleClick={handeOpenDialog}/>
+                <IconButton type="plus" size="lx" handleClick={handeOpenDialog}/>
                 <Dialog open={openDialog} setOpen={handeOpenDialog}>
                     <Creator />
                 </Dialog>
