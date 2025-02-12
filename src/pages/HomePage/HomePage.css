@@ -35,3 +35,55 @@
     cursor: pointer;
     color: var(--main-bg-green);
 }
+
+.home-content {
+    width: 70vw;
+    margin: auto;
+}
+
+.home-title {
+    font-size: 30px;
+    color: var(--main-bg-green);
+    font-weight: 600;
+    padding: 15px;
+    margin-top: 45px;
+}
+
+.home-summary {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 45px;
+}
+
+.home-card {
+    background-color: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    flex-grow: 1;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+}
+
+.card-header span {
+    color: var(--main-bg-green);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.card-header i {
+    font-size: 32px;
+    color: var(--main-bg-green);
+}
+
+.card-value {
+    margin-top: 15px;
+    font-size: 25px;
+    font-weight: 600;
+}
