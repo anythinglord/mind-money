@@ -5,8 +5,7 @@ html, body {
   padding: 0;
   overflow: hidden; 
   height: 100vh;
-  /* Tailwind default */
-  font-family: system-ui, sans-serif; /* Para `font-sans` */
-  font-family: Georgia, serif; /* Para `font-serif` */
-  font-family: Menlo, monospace; /* Para `font-mono` */
+  font-family: system-ui, sans-serif; 
+  font-family: Georgia, serif; 
+  font-family: Menlo, monospace; 
 }
