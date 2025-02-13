@@ -7,6 +7,6 @@ interface Props {
 
 export const Button = ({ label, handleClick }: Props) => {
     return (
-        <button className='btn' onClick={handleClick}>{label}</button>
+        <button className='btn' onClick={handleClick}>{label?.toUpperCase()}</button>
     )
 }

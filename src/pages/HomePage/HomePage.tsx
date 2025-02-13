@@ -4,11 +4,14 @@ import { Creator } from '../../components/Creator/Creator';
 import { Dialog } from '../../components/Dialog/Dialog';
 import './HomePage.css'
 import { IconButton } from '../../components/IconButon/IconButton';
+import { Table } from '../../components/Table/Table';
 
 const HomePage = () => {
 
     const [openDialog, setOpenDialog] = useState(false)
     const handeOpenDialog = () => setOpenDialog(prevState => !prevState)
+    
+
     return(
         <div className='index-home'>
             <div className="navbar">
@@ -60,6 +63,7 @@ const HomePage = () => {
                         <div className="card-value">$6,300</div>
                     </div>
                 </div>
+                <Table />
                 <div className="position-end">
                     <IconButton type="plus" size="lx" handleClick={handeOpenDialog}/>    
                 </div>

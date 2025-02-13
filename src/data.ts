@@ -1,8 +1,8 @@
-import { Section } from './interfaces';
+import { Section, Category } from './interfaces';
 
 export const HomePageSections: Section[] = [
-    { name: 'Budget', icon: 'wallet', value: 5000 },
-    { name: 'Income', icon: 'dollar', value: 6000 },
-    { name: 'Expenses', icon: 'wallet', value: 5000 },
-    { name: 'Saving', icon: 'wallet', value: 5000 }
+    { name: Category.Budget, icon: 'wallet', amount: 5000 },
+    { name: Category.Income, icon: 'dollar', amount: 6000 },
+    { name: Category.Expenses, icon: 'wallet', amount: 5000 },
+    { name: Category.Saving, icon: 'wallet', amount: 5000 }
 ]

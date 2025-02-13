@@ -1,0 +1,19 @@
+.table-index {
+    background-color: #fff;
+    height: 45vh;
+    border-radius: 15px;
+    margin: 50px 20px 0 20px;
+}
+
+
+
+.table-header {
+    font-weight: 600;
+}
+
+.table-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid #ccc;
+}

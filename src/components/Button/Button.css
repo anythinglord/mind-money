@@ -4,8 +4,12 @@
     padding: 10px;
     height: 45px;
     color: #fff;
-    font-size: 15px;
+    font-size: 17px;
+    font-weight: 600;
     width: 100%;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
+    &:hover {
+        background-color: var(--main-bg-greeno);
+    }
 }
