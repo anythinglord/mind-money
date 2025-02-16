@@ -1,6 +1,6 @@
 .table-index {
     background-color: #fff;
-    height: 45vh;
+    height: 460px;
     border-radius: 15px;
     margin: 50px 20px 0 20px;
 }
@@ -14,6 +14,15 @@
 .table-row {
     display: flex;
     justify-content: space-between;
-    padding: 15px;
+    padding: 12px;
     border-bottom: 1px solid #ccc;
+}
+
+.tbl-column {
+    width: 25%;
+    text-align: right;
+}
+
+.col-left {
+    text-align: left;
 }

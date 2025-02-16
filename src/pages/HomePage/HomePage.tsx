@@ -2,15 +2,31 @@ import { useState } from 'react';
 import { Avatar } from '../../components/Avatar/Avatar';
 import { Creator } from '../../components/Creator/Creator';
 import { Dialog } from '../../components/Dialog/Dialog';
-import './HomePage.css'
 import { IconButton } from '../../components/IconButon/IconButton';
 import { Table } from '../../components/Table/Table';
+import { Category, Item } from '../../interfaces';
+import './HomePage.css'
 
 const HomePage = () => {
 
     const [openDialog, setOpenDialog] = useState(false)
     const handeOpenDialog = () => setOpenDialog(prevState => !prevState)
-    
+    const [items, setItems] = useState<Item[]>([])
+
+    const createNewItem = (data) => {
+        console.log(data)
+        setItems((prevItems) => {
+            var newItems = [...prevItems]
+            const newItem: Item = { 
+                date: '2025-02-13',
+                description: 'new item',
+                category:  Category.Expenses,
+                amount: 1200 
+            }
+            newItems.push(newItem)
+            return newItems
+        })
+    }
 
     return(
         <div className='index-home'>
@@ -27,7 +43,7 @@ const HomePage = () => {
                 <Avatar />
             </div>
             <Dialog open={openDialog} setOpen={handeOpenDialog}>
-                <Creator />
+                <Creator handleAddItem={createNewItem} setDialogOpen={handeOpenDialog}/>
             </Dialog>
             <div className="home-content">
                 <div className="home-title">
@@ -63,7 +79,7 @@ const HomePage = () => {
                         <div className="card-value">$6,300</div>
                     </div>
                 </div>
-                <Table />
+                <Table data={items}/>
                 <div className="position-end">
                     <IconButton type="plus" size="lx" handleClick={handeOpenDialog}/>    
                 </div>
