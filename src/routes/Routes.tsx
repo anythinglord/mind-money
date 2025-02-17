@@ -1,9 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
-import HomePage from '../pages/HomePage/HomePage';
-import LoginPage from '../pages/LoginPage/LoginPage';
+import HomePage from '../pages/Home/Home';
+import LoginPage from '../pages/Login/Login';
 import PrivateRoute from './PrivateRoute';
 import RedirectRoute from './RedirectRoute';
-import { ExpensesPage } from '../pages/ExpensesPage/ExpensesPage';
+import { ExpensesPage } from '../pages/Expenses/Expense';
 
 export const AppRoutes = () => {
   return (
