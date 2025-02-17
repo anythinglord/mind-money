@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import { Avatar } from '../../components/Avatar/Avatar';
 import { Creator } from '../../components/Creator/Creator';
 import { Dialog } from '../../components/Dialog/Dialog';
-import { IconButton } from '../../components/IconButon/IconButton';
 import { Table } from '../../components/Table/Table';
-import { Category, Item, ItemCreated } from '../../interfaces';
-import './HomePage.css'
+import { Category, Item, ItemCreated } from '../../models/interfaces';
+import './index.css'
 import { NavBar } from '../../components/NavBar/NavBar';
 
 const HomePage = () => {
