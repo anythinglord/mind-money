@@ -1,21 +1,39 @@
 .table-index {
     background-color: #fff;
-    height: 460px;
-    border-radius: 15px;
+    height: 470px;
+    border-radius: 8px;
     margin: 50px 20px 0 20px;
+    display: flex;
+    flex-direction: column;
 }
-
-
 
 .table-header {
     font-weight: 600;
+    height: 30px;
+    font-size: 18px;
+    background-color: var(--main-bg-green);
+    color: #fff;
+    border-radius: 8px 8px 0 0px;
+}
+
+.table-content {
+    height: 440px;
+    overflow-y: auto;
 }
 
 .table-row {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 12px;
     border-bottom: 1px solid #ccc;
+}
+
+.table-footer {
+    height: 30px;
+    padding: 12px;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .tbl-column {

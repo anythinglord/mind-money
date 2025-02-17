@@ -4,7 +4,7 @@ import { Creator } from '../../components/Creator/Creator';
 import { Dialog } from '../../components/Dialog/Dialog';
 import { IconButton } from '../../components/IconButon/IconButton';
 import { Table } from '../../components/Table/Table';
-import { Category, Item } from '../../interfaces';
+import { Category, Item, ItemCreated } from '../../interfaces';
 import './HomePage.css'
 
 const HomePage = () => {
@@ -13,15 +13,15 @@ const HomePage = () => {
     const handeOpenDialog = () => setOpenDialog(prevState => !prevState)
     const [items, setItems] = useState<Item[]>([])
 
-    const createNewItem = (data) => {
-        console.log(data)
+    const createNewItem = (data: ItemCreated) => {
+        const { description, amount } = data;
         setItems((prevItems) => {
             var newItems = [...prevItems]
             const newItem: Item = { 
                 date: '2025-02-13',
-                description: 'new item',
+                description: description,
                 category:  Category.Expenses,
-                amount: 1200 
+                amount: amount 
             }
             newItems.push(newItem)
             return newItems
