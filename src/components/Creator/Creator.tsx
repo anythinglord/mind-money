@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
-import { List } from "../List/List";
 import "./index.css";
 
 interface Props {
@@ -12,9 +11,13 @@ interface Props {
 export const Creator = ({ handleAddItem, setDialogOpen }: Props) => {
 
     const amountRef = useRef<HTMLInputElement>(null);
+    const descriptionRef = useRef<HTMLInputElement>(null);
+
     const handleCreateItem = () => {
-        console.log(amountRef.current?.value)
-        handleAddItem('data')
+        handleAddItem({
+            description: descriptionRef.current?.value,
+            amount: amountRef.current?.value
+        })
         setDialogOpen()        
     }
 
@@ -22,9 +25,8 @@ export const Creator = ({ handleAddItem, setDialogOpen }: Props) => {
         <div className="creator-index">
             <div className="creator-content">
                 <div className="group">
-                    <Input label="item name"/>
-                    <Input label="amount" type="number" inputRef={amountRef}/>
-                    <List label="Category" />
+                    <Input label="Description" inputRef={descriptionRef}/>
+                    <Input label="Amount" type="number" inputRef={amountRef}/>
                 </div>
                 <Button label="create" handleClick={handleCreateItem}/>
             </div>

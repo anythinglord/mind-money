@@ -16,3 +16,5 @@ export interface Item {
     category: Category
     amount: number
 }
+
+export type ItemCreated = Pick<Item, 'description' | 'amount'>
