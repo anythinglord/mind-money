@@ -6,6 +6,7 @@ import { IconButton } from '../../components/IconButon/IconButton';
 import { Table } from '../../components/Table/Table';
 import { Category, Item, ItemCreated } from '../../interfaces';
 import './HomePage.css'
+import { NavBar } from '../../components/NavBar/NavBar';
 
 const HomePage = () => {
 
@@ -30,18 +31,7 @@ const HomePage = () => {
 
     return(
         <div className='index-home'>
-            <div className="navbar">
-                <div className="logo">
-                    Mind Money
-                </div>
-                <div className="navigation">
-                    <a>Expenses</a>
-                    <a>Budget</a>
-                    <a>Goals</a>
-                    <a>Reports</a>
-                </div>
-                <Avatar />
-            </div>
+            <NavBar />
             <Dialog open={openDialog} setOpen={handeOpenDialog}>
                 <Creator handleAddItem={createNewItem} setDialogOpen={handeOpenDialog}/>
             </Dialog>
@@ -80,9 +70,6 @@ const HomePage = () => {
                     </div>
                 </div>
                 <Table data={items}/>
-                <div className="position-end">
-                    <IconButton type="plus" size="lx" handleClick={handeOpenDialog}/>    
-                </div>
             </div>
         </div>
     )
