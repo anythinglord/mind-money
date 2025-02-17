@@ -2,7 +2,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 
 const RedirectRoute = ({ }) => {
 
-    const isAuthenticated = true;
+    const isAuthenticated = false;
     if (isAuthenticated) {
         return <Navigate to="/home"/>
     }
