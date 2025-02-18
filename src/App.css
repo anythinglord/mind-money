@@ -10,14 +10,28 @@ html, body {
   font-family: Menlo, monospace; 
 }
 
+.flex-sp-cen {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .position-end{
   position: absolute;
   left: calc(80vw - 2px);
-  top: calc(90vh - 2px);
+  top: calc(85vh - 2px);
 }
 
 .page-content {
   width: 70vw;
   margin: auto;
   height: 100%;
+}
+
+.page-title {
+  font-size: 30px;
+  color: var(--main-bg-green);
+  font-weight: 600;
+  padding: 15px;
+  margin-top: 45px;
 }
