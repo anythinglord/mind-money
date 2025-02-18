@@ -3,14 +3,6 @@
     height: 100vh;
 }
 
-.home-title {
-    font-size: 30px;
-    color: var(--main-bg-green);
-    font-weight: 600;
-    padding: 15px;
-    margin-top: 45px;
-}
-
 .home-summary {
     padding: 15px;
     display: flex;

@@ -1,40 +1,14 @@
-import { useState } from 'react';
-import { Creator } from '../../components/Creator/Creator';
-import { Dialog } from '../../components/Dialog/Dialog';
 import { Table } from '../../components/Table/Table';
-import { Category, Item, ItemCreated } from '../../models/interfaces';
 import './index.css'
 import { NavBar } from '../../components/NavBar/NavBar';
 
 const HomePage = () => {
 
-    const [openDialog, setOpenDialog] = useState(false)
-    const handeOpenDialog = () => setOpenDialog(prevState => !prevState)
-    const [items, setItems] = useState<Item[]>([])
-
-    const createNewItem = (data: ItemCreated) => {
-        const { description, amount } = data;
-        setItems((prevItems) => {
-            var newItems = [...prevItems]
-            const newItem: Item = { 
-                date: '2025-02-13',
-                description: description,
-                category:  Category.Expenses,
-                amount: amount 
-            }
-            newItems.push(newItem)
-            return newItems
-        })
-    }
-
     return(
         <div className='index-home'>
             <NavBar />
-            <Dialog open={openDialog} setOpen={handeOpenDialog}>
-                <Creator handleAddItem={createNewItem} setDialogOpen={handeOpenDialog}/>
-            </Dialog>
             <div className="page-content">
-                <div className="home-title">
+                <div className="page-title">
                     Financial Summary
                 </div>
                 <div className="home-summary">
@@ -67,7 +41,7 @@ const HomePage = () => {
                         <div className="card-value">$6,300</div>
                     </div>
                 </div>
-                <Table data={items}/>
+                <Table data={[]} />
             </div>
         </div>
     )

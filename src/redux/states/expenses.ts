@@ -10,8 +10,8 @@ export const expensesSlice = createSlice({
     initialState: getLocalStorage(LocalStorageTypes.EXPENSES) 
         ? JSON.parse(getLocalStorage(LocalStorageTypes.EXPENSES) as string) : initialState,
     reducers: {
-        addExpense: (state, action) => {
-            setLocalStorage(LocalStorageTypes.EXPENSES, state)
+        addExpense: ( _, action) => {
+            setLocalStorage(LocalStorageTypes.EXPENSES, action.payload)
             return action.payload
         } 
     }
