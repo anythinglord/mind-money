@@ -33,7 +33,7 @@ const HomePage = () => {
             <Dialog open={openDialog} setOpen={handeOpenDialog}>
                 <Creator handleAddItem={createNewItem} setDialogOpen={handeOpenDialog}/>
             </Dialog>
-            <div className="home-content">
+            <div className="page-content">
                 <div className="home-title">
                     Financial Summary
                 </div>

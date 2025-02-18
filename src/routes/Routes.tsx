@@ -3,7 +3,7 @@ import HomePage from '../pages/Home/Home';
 import LoginPage from '../pages/Login/Login';
 import PrivateRoute from './PrivateRoute';
 import RedirectRoute from './RedirectRoute';
-import { ExpensesPage } from '../pages/Expenses/Expense';
+import { ExpensesPage } from '../pages/Expenses/Expenses';
 
 export const AppRoutes = () => {
   return (

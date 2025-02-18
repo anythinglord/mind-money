@@ -15,3 +15,9 @@ html, body {
   left: calc(80vw - 2px);
   top: calc(90vh - 2px);
 }
+
+.page-content {
+  width: 70vw;
+  margin: auto;
+  height: 100%;
+}
