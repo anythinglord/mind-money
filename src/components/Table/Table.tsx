@@ -1,4 +1,4 @@
-import { Item } from "../../interfaces"
+import { Item } from "../../models/interfaces"
 import "./index.css"
 
 interface Props {

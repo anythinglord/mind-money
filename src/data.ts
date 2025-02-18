@@ -1,4 +1,4 @@
-import { Section, Category } from './interfaces';
+import { Section, Category } from './models/interfaces';
 
 export const HomePageSections: Section[] = [
     { name: Category.Budget, icon: 'wallet', amount: 5000 },
