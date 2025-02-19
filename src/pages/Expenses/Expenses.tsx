@@ -4,7 +4,7 @@ import { Dialog } from "../../components/Dialog/Dialog"
 import { IconButton } from "../../components/IconButon/IconButton"
 import { NavBar } from "../../components/NavBar/NavBar"
 import { Table } from "../../components/Table/Table"
-import { Category, Item, ItemCreated } from '../../models/interfaces';
+import { Type, Item, ItemCreated } from '../../models/interfaces';
 import { useDispatch } from "react-redux"
 import "./index.css"
 import { addExpense } from "../../redux/states"
@@ -27,7 +27,7 @@ export const ExpensesPage = () => {
                 date: '2025-02-13',
                 description: description,
                 category: 'Food',
-                type:  Category.Expenses,
+                type:  Type.Expenses,
                 amount: amount 
             }
             newItems.push(newItem)

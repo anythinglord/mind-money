@@ -8,11 +8,14 @@ interface Props {
 export const Table = ({ data }: Props) => {
 
     const columns: string[] = ['Date', 'Description', 'Category', 'Amount']
-    console.log(data)
     return (
         <div className="table-index">
             <div className="table-header flex-sp-cen">
-                {columns.map((column, index) => (<div className={`tbl-column ${index === 0 ? 'col-left' : ''}`}>{column}</div>))}
+                {columns.map((column, index) => (
+                    <div className={`tbl-column ${index === 0 ? 'col-left' : ''}`} key={index}>
+                        {column}
+                    </div>
+                ))}
             </div>
             <div className="table-content">
                 {data.map(({ date, description, category, amount }, index) => (

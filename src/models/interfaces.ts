@@ -1,11 +1,11 @@
-export enum Category {
+export enum Type {
     Budget= 'Budget',
     Income= 'Income',
     Expenses= 'Expenses',
     Saving= 'Saving'
 }
 export interface Section  {
-    name: Category
+    name: Type
     icon: string
     amount: number
 }
@@ -14,7 +14,7 @@ export interface Item {
     date: string
     description: string
     category: string
-    type: Category
+    type: Type
     amount: number
 }
 
