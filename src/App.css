@@ -10,6 +10,10 @@ html, body {
   font-family: Menlo, monospace; 
 }
 
+.color-white {
+  color: white;
+}
+
 .flex-sp-cen {
   display: flex;
   justify-content: space-between;

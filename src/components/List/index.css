@@ -7,7 +7,7 @@
 
 .list-button {
     background-color: #fff;
-    width: 200px;
+    width: 205px;
     border: 1px solid #eee;
     border-radius: 8px;
     text-align: left;
@@ -25,9 +25,10 @@
 
 .list-collapse {
     position: absolute;
+    background-color:  #fff;
     width: 200px;
     margin-top: 45px;
-    background-color: #fff;
+    padding: 2px;
     border: 1px solid #eee;
     border-radius: 8px;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -39,6 +40,15 @@
     cursor: pointer;
     &:hover {
         background-color: #eee;
+        border-radius: 5px;
     }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.list-item span {
+    flex-grow: 1;
 }
 

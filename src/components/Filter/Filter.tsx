@@ -6,7 +6,7 @@ export const Filter =() => {
     return(
         <div className="filter-index">
             <div className='filter-items'>
-                <List label="All categories" />
+                <List />
                 <Button label='Add Expense'></Button>
             </div>
             <div className='filter-items filter-search'>
