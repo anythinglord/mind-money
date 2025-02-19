@@ -15,8 +15,8 @@ export const Table = ({ data }: Props) => {
                 {columns.map((column, index) => (<div className={`tbl-column ${index === 0 ? 'col-left' : ''}`}>{column}</div>))}
             </div>
             <div className="table-content">
-                {data.map(({ date, description, category, amount }) => (
-                    <div className="table-row flex-sp-cen">
+                {data.map(({ date, description, category, amount }, index) => (
+                    <div className="table-row flex-sp-cen" key={index}>
                         <div className="tbl-column col-left">{date}</div>
                         <div className="tbl-column">{description}</div>
                         <div className="tbl-column">{category}</div>

@@ -3,14 +3,14 @@
     height: 472px;
     border-radius: 5px;
     border: 1px solid #ddd;
-    margin: 50px 20px 0 20px;
+    margin: 20px 20px 0 20px;
     display: flex;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .table-header {
-    font-weight: 800;
+    font-weight: 600;
     height: 30px;
     padding: 12px;
     font-size: 14px;

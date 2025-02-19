@@ -17,9 +17,11 @@ export const List = ({ label }: Props) => {
                 {label} 
                 <i className={`fa-solid fa-chevron-${open ? 'up': 'down'}`}></i>
             </button>
-            {open && options.map(({ name })=>(
-                <div className="list-item">{  name }</div>
-            ))}
+            <div className="list-collapse">
+                {open && options.map(({ name })=>(
+                    <div className="list-item">{  name }</div>
+                ))}
+            </div>
         </div>
     )
 } 

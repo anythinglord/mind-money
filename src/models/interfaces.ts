@@ -13,7 +13,8 @@ export interface Section  {
 export interface Item {
     date: string
     description: string
-    category: Category
+    category: string
+    type: Category
     amount: number
 }
 
