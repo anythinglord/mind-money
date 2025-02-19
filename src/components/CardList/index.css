@@ -1,0 +1,38 @@
+.cardl-index {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 45px;
+}
+
+.card-box {
+    background-color: #fff;
+    padding: 18px;
+    border-radius: 10px;
+    flex-grow: 1;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+}
+
+.card-header span {
+    color: var(--main-bg-green);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.card-header i {
+    font-size: 32px;
+    color: var(--main-bg-green);
+}
+
+.card-value {
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: 600;
+}

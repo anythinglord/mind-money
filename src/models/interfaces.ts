@@ -5,9 +5,9 @@ export enum Type {
     Saving= 'Saving'
 }
 export interface Section  {
-    name: Type
+    name: string
     icon: string
-    amount: number
+    value: number | string
 }
 
 export interface Item {

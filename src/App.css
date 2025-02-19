@@ -37,5 +37,13 @@ html, body {
   color: var(--main-bg-green);
   font-weight: 600;
   padding: 15px;
-  margin-top: 45px;
+  margin-top: 30px;
+}
+
+.page-subtitle {
+  font-size: 23px;
+  color: var(--main-bg-green);
+  font-weight: 700;
+  padding: 15px;
+  margin-top: 20px;
 }

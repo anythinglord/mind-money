@@ -10,6 +10,8 @@ import "./index.css"
 import { addExpense } from "../../redux/states"
 import store from "../../redux/store"
 import { Filter } from "../../components/Filter"
+import { CardList } from "../../components/CardList"
+import { ExpensesCardSections, HomeCardSections } from "../../data"
 
 
 export const ExpensesPage = () => {
@@ -46,6 +48,7 @@ export const ExpensesPage = () => {
                 <div className="page-title">
                     Expenses Overview
                 </div>
+                <CardList data={ExpensesCardSections}/>
                 <Filter />
                 <Table data={items} />
                 <div className="position-end">
