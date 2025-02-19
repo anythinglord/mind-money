@@ -1,0 +1,39 @@
+.filter-index {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter-items {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.filter-search {
+    background-color: #fff;
+    width: 200px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    text-align: left;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+}
+
+.filter-search input {
+    height: 25px;
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-right: 10px;
+}
+
+.filter-search i {
+    margin-left: 5px;
+    font-size: 22px;
+    color: #ccc;
+}

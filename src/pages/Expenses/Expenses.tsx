@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux"
 import "./index.css"
 import { addExpense } from "../../redux/states"
 import store from "../../redux/store"
+import { Filter } from "../../components/Filter"
+
 
 export const ExpensesPage = () => {
 
@@ -24,7 +26,8 @@ export const ExpensesPage = () => {
             const newItem: Item = { 
                 date: '2025-02-13',
                 description: description,
-                category:  Category.Expenses,
+                category: 'Food',
+                type:  Category.Expenses,
                 amount: amount 
             }
             newItems.push(newItem)
@@ -43,6 +46,7 @@ export const ExpensesPage = () => {
                 <div className="page-title">
                     Expenses Overview
                 </div>
+                <Filter />
                 <Table data={items} />
                 <div className="position-end">
                     <IconButton type="plus" size="lx" handleClick={handeOpenDialog} />    
