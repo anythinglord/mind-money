@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { Avatar } from "../Avatar/Avatar"
+import { Avatar } from "../Avatar"
 import "./index.css"
 
 export const NavBar = () => {

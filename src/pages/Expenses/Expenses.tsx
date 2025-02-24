@@ -1,16 +1,16 @@
 import { useState } from "react"
-import { Creator } from "../../components/Creator/Creator"
-import { Dialog } from "../../components/Dialog/Dialog"
-import { NavBar } from "../../components/NavBar/NavBar"
-import { Table } from "../../components/Table/Table"
-import { Type, Item, ItemCreated } from '../../models/interfaces';
+import { Creator } from "../../components/Creator"
+import { Dialog } from "../../components/Dialog"
+import { NavBar } from "../../components/NavBar"
+import { Table } from "../../components/Table"
+import { Type, Item, ItemCreated } from '../../models';
 import { useDispatch } from "react-redux"
-import "./index.css"
 import { addExpense } from "../../redux/states"
 import store from "../../redux/store"
 import { Filter } from "../../components/Filter"
 import { CardList } from "../../components/CardList"
 import { ExpensesCardSections } from "../../data"
+import "./index.css"
 
 export const ExpensesPage = () => {
 

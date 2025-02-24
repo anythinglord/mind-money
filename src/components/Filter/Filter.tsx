@@ -1,5 +1,5 @@
-import { Button } from '../Button/Button'
-import { dialogOpenSubject$ } from '../Dialog/Dialog'
+import { Button } from '../Button'
+import { dialogOpenSubject$ } from '../Dialog'
 import { List } from '../List'
 import './index.css'
 

@@ -1,6 +1,6 @@
-import { Table } from '../../components/Table/Table';
+import { Table } from '../../components/Table';
 import './index.css'
-import { NavBar } from '../../components/NavBar/NavBar';
+import { NavBar } from '../../components/NavBar';
 import { CardList } from '../../components/CardList';
 import { HomeCardSections } from '../../data';
 

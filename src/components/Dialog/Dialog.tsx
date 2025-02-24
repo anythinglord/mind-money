@@ -1,6 +1,6 @@
 import { SubjectManager } from "../../models"
 import React, { useEffect, useState } from "react"
-import { IconButton } from "../IconButon/IconButton"
+import { IconButton } from "../IconButon"
 import { Subscription } from "rxjs"
 import "./index.css"
 interface Props {
