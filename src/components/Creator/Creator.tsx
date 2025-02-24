@@ -2,13 +2,13 @@ import { useRef } from "react";
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import "./index.css";
+import { dialogCloseSubject$ } from "../Dialog/Dialog";
 
 interface Props {
     handleAddItem: (data: any) => void
-    setDialogOpen: () => void
 }
 
-export const Creator = ({ handleAddItem, setDialogOpen }: Props) => {
+export const Creator = ({ handleAddItem }: Props) => {
 
     const amountRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
@@ -18,7 +18,8 @@ export const Creator = ({ handleAddItem, setDialogOpen }: Props) => {
             description: descriptionRef.current?.value,
             amount: amountRef.current?.value
         })
-        setDialogOpen()        
+        // close dialog
+        dialogCloseSubject$.setSubject = true;       
     }
 
     return(
