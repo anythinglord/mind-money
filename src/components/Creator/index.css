@@ -12,6 +12,13 @@
     margin-bottom: 55px;
 }
 
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
 .creator-content {
     margin-top: 55px;
     height: 100%;

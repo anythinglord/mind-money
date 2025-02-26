@@ -10,9 +10,9 @@
 }
 
 .input {
-    border: 1px solid #ccc;
-    padding: 10px;
-    border-radius: 10px;
-    height: 25px;
-    font-size: 18px;
+    border: 1px solid #ddd;
+    padding: 8px 24px;
+    border-radius: 8px;
+    height: 22px;
+    font-size: 16px;
 }

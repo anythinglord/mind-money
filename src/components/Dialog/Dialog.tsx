@@ -5,12 +5,13 @@ import { Subscription } from "rxjs"
 import "./index.css"
 interface Props {
     children: React.ReactNode
+    title: string
 }
 
 export const dialogOpenSubject$ = new SubjectManager<boolean>();
 export const dialogCloseSubject$ = new SubjectManager<boolean>();
 
-export const Dialog = ({ children }: Props) => {
+export const Dialog = ({ children, title }: Props) => {
 
     const [open, setOpen] = useState<boolean>(false)
     
@@ -40,7 +41,7 @@ export const Dialog = ({ children }: Props) => {
             {open && <div className="dialog-wrap">
                 <div className="dialog-index">
                     <div className="dialog-header">
-                        Create new item
+                        {title}
                         <IconButton type="xmark" handleClick={handleClose}/>
                     </div>
                     {children}
