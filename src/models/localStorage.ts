@@ -1,3 +1,4 @@
 export enum LocalStorageTypes {
-    EXPENSES = 'expenses'
+    EXPENSES = 'expenses',
+    CATEGORY = 'category'
 }

@@ -18,4 +18,4 @@ export interface Item {
     amount: number
 }
 
-export type ItemCreated = Pick<Item, 'description' | 'amount'>
+export type ItemCreated = Pick<Item, 'description' | 'amount' | 'category'>

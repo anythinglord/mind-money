@@ -18,13 +18,13 @@ export const ExpensesPage = () => {
     const [items, setItems] = useState<Item[]>(store.getState().expenses)
 
     const createNewItem = (data: ItemCreated) => {
-        const { description, amount } = data;
+        const { description, amount, category } = data;
         setItems((prevItems) => {
             var newItems = [...prevItems]
             const newItem: Item = { 
                 date: '2025-02-13',
                 description: description,
-                category: 'Food',
+                category: category,
                 type:  Type.Expenses,
                 amount: amount 
             }
@@ -37,7 +37,7 @@ export const ExpensesPage = () => {
     return(
         <div className="expenses-index">
             <NavBar/>
-            <Dialog>
+            <Dialog title='Create Expense'>
                 <Creator handleAddItem={createNewItem} />
             </Dialog>
             <div className="page-content">

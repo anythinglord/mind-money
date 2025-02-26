@@ -1,16 +1,20 @@
-import "./index.css"
 import { Categories } from "../../data"
 import { useState } from "react"
+import "./index.css"
+import { useDispatch } from "react-redux"
+import { setCategory } from "../../redux/states/category"
 
 export const List = () => {
 
     const options = Categories
+    const dispatch = useDispatch()
     const [selected, setSelected] = useState<string>(options[0])
     const [open, setOpen] = useState(false)
 
     const handleChange = (name: string) => {
         setOpen(prevState => !prevState)
         setSelected(name)
+        dispatch(setCategory(name))
     }
 
     return(
@@ -27,7 +31,6 @@ export const List = () => {
                     </div>
                 ))}
             </div>}
-            
         </div>
     )
 }
