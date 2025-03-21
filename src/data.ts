@@ -1,4 +1,4 @@
-import { Section, Type } from './models/interfaces';
+import { Section } from './models/interfaces';
 
 export const HomeCardSections: Section[] = [
     { name: 'Total Budget', icon: 'wallet', value: 5000 },
