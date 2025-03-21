@@ -1,15 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { Item } from "../models/interfaces";
-import { categorySlice, CategoryState, expensesSlice } from "./states";
+import { categorySlice, CategoryState, expensesSlice, userSlice, UserState } from "./states";
 
 export interface AppStore {
     expenses: Item[]
-    category: CategoryState    
+    category: CategoryState
+    user: UserState    
 }
 
 export default configureStore<AppStore>({
     reducer: {
         expenses: expensesSlice.reducer,
-        category: categorySlice.reducer
+        category: categorySlice.reducer,
+        user: userSlice.reducer
     }
 })
