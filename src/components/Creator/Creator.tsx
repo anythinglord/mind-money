@@ -6,21 +6,19 @@ import { List } from "../List";
 import { AppStore } from "../../redux/store"
 import "./index.css";
 import { useSelector } from "react-redux";
+import { useExpenses } from "../../hooks/useExpenses";
 
-interface Props {
-    handleAddItem: (data: any) => void
-}
-
-export const Creator = ({ handleAddItem }: Props) => {
+export const Creator = () => {
 
     const amountRef = useRef<HTMLInputElement>(null);
     const descriptionRef = useRef<HTMLInputElement>(null);
-    const stateCategory = useSelector((store: AppStore) => store.category) 
+    const stateCategory = useSelector((store: AppStore) => store.category)
+    const { createItem } = useExpenses(); 
 
     const handleCreateItem = () => {
-        handleAddItem({
+        createItem({
             description: descriptionRef.current?.value,
-            amount: amountRef.current?.value,
+            amount: Number(amountRef.current?.value),
             category: stateCategory.name
         })
         // close dialog

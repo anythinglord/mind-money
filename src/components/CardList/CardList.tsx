@@ -9,8 +9,8 @@ export const CardList = ({ data }: Props) => {
 
     return (
         <div className='cardl-index'>
-            {data.map(({ name, icon, value }) => (
-                <div className='card-box'>
+            {data.map(({ name, icon, value }, index) => (
+                <div className='card-box' key={index}>
                     <div className="card-header">
                         <span>{name}</span>
                         <i className={`fa-solid fa-${icon}`} />

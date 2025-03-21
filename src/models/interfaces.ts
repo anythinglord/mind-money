@@ -12,10 +12,10 @@ export interface Section  {
 
 export interface Item {
     date: string
-    description: string
-    category: string
+    description: string | undefined
+    category: string 
     type: Type
-    amount: number
+    amount: number | undefined
 }
 
 export type ItemCreated = Pick<Item, 'description' | 'amount' | 'category'>

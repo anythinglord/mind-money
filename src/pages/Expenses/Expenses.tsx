@@ -1,44 +1,26 @@
-import { useState } from "react"
 import { Creator } from "../../components/Creator"
 import { Dialog } from "../../components/Dialog"
 import { NavBar } from "../../components/NavBar"
 import { Table } from "../../components/Table"
 import { Type, Item, ItemCreated } from '../../models';
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { addExpense } from "../../redux/states"
-import store from "../../redux/store"
 import { Filter } from "../../components/Filter"
 import { CardList } from "../../components/CardList"
 import { ExpensesCardSections } from "../../data"
+
 import "./index.css"
+import { useExpenses } from "../../hooks/useExpenses";
 
 export const ExpensesPage = () => {
 
-    const dispatch = useDispatch()
-    const [items, setItems] = useState<Item[]>(store.getState().expenses)
-
-    const createNewItem = (data: ItemCreated) => {
-        const { description, amount, category } = data;
-        setItems((prevItems) => {
-            var newItems = [...prevItems]
-            const newItem: Item = { 
-                date: '2025-02-13',
-                description: description,
-                category: category,
-                type:  Type.Expenses,
-                amount: amount 
-            }
-            newItems.push(newItem)
-            dispatch(addExpense(newItems))
-            return newItems
-        })
-    }
+    const { expenses } = useExpenses();
 
     return(
         <div className="expenses-index">
             <NavBar/>
             <Dialog title='Create Expense'>
-                <Creator handleAddItem={createNewItem} />
+                <Creator />
             </Dialog>
             <div className="page-content">
                 <div className="page-title">
@@ -46,7 +28,7 @@ export const ExpensesPage = () => {
                 </div>
                 <CardList data={ExpensesCardSections}/>
                 <Filter />
-                <Table data={items} />
+                <Table data={expenses} />
             </div>
         </div>
     )
