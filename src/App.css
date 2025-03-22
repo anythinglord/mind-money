@@ -14,6 +14,10 @@ html, body {
   color: white;
 }
 
+.fgrow-1 {
+  flex-grow: 1;
+}
+
 .flex-sp-cen {
   display: flex;
   justify-content: space-between;
