@@ -1,5 +1,5 @@
 import { config } from '../config'
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const url = config.API_URL
 
@@ -16,8 +16,21 @@ export const login = async (email: string, password: string) => {
         )
         return response.data;
     } catch (error) {
-        console.error("Login failed:", error);
+        //console.error("Login failed:", error);
         throw new Error("Invalid credentials");
+    }
+}
+
+export const signup = async (email: string, password: string) => {
+    try {
+        const response = await axios.post(`${url}/users/signup`,
+            { email, password },
+            { withCredentials: true }
+        )
+        return response.data;
+    } catch (error) {
+        console.error("Signup failed:", error);
+        throw new Error("Internal error ");
     }
 }
 
@@ -26,7 +39,7 @@ export const logout = async () => {
         const response = await axios.post(`${url}/users/logout`)
         return response.data;
     } catch (error) {
-        console.error("Logout failed:", error);
-        throw new Error("Invalid credentials");
+        //console.error("Logout failed:", error);
+        throw new Error("Internal error");
     }
 }

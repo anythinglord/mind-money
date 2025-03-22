@@ -25,6 +25,20 @@
 }
 
 .message {
-    font-size: 11px;
+    font-size: 13px;
     color: #292929;
+    font-weight: 500;
+}
+
+.error-message {
+    font-size: 15px;
+    color: var(--main-bg-error);
+}
+
+.message a {
+    cursor: pointer;
+    color: var(--main-bg-green);
+    &:hover {
+        border-bottom: 1px solid var(--main-bg-green) ;
+    }
 }
