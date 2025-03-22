@@ -8,8 +8,8 @@ export const NavBar = () => {
 
     return (
         <div className="navbar">
-            <div className="logo">
-                Mind Money
+            <div className="fgrow-1">
+                <div className="logo" onClick={() => navigate('/home')}>Mind Money</div>
             </div>
             <div className="navigation">
                 <a onClick={() => navigate('/expenses')} >Expenses</a>

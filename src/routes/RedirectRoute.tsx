@@ -6,7 +6,7 @@ const RedirectRoute = ({ }) => {
 
     const stateUser = useSelector((store: AppStore) => store.user)
     if (stateUser) {
-        return <Navigate to="/expenses"/>
+        return <Navigate to="/home" />
     }
     return <Outlet/>
 }

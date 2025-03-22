@@ -8,13 +8,13 @@
 
 .card {
     background-color: #fff;
-    height: 50vh;
+    height: 500px;
     width: 25vw;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 25px;
+    gap: 35px;
     border-radius: 15px;
     padding: 25px;
 }

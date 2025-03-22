@@ -20,3 +20,13 @@ export const login = async (email: string, password: string) => {
         throw new Error("Invalid credentials");
     }
 }
+
+export const logout = async () => {
+    try {
+        const response = await axios.post(`${url}/users/logout`)
+        return response.data;
+    } catch (error) {
+        console.error("Logout failed:", error);
+        throw new Error("Invalid credentials");
+    }
+}

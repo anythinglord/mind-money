@@ -18,7 +18,7 @@ const LoginPage = () => {
         mutationFn: () => login(emailRef.current?.value || '', passwordRef.current?.value || ''),
         onSuccess: (data) => {
             dispatch(setUser(data.user))
-            navigate('/expenses')
+            navigate('/home')
         },
         onError: (error) => alert("Error: " + error.message),
     });
