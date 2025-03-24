@@ -6,12 +6,49 @@ import { setUser } from "../../redux/states";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from '@tanstack/react-query';
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { isTrue } from "../../utils";
+import { userSchema } from "../../schemas";
+import { User } from "../../models";
 import "./index.css";
+
+const schema = z.object({
+    email: z.string().email("Invalid email"),
+    password: z.string()
+        .min(5, "Must be at least 12 characters long")
+        /*.regex(/^(?=.*[a-z])(?=.*[A-Z])/, "Must include upper case letters")
+        .regex(/[!@#$%^&*(),.?":{}|<>]/, "Must contain at least one special character")
+        .regex(/\d/, "Must contain at least one number"),*/,
+    confirm: z.string(),
+}).refine((data) => data.password === data.confirm, {
+    message: "Passwords must match",
+    path: ["confirm"],
+});
 
 const LoginPage = () => {
     const [mode, setMode] = useState<string>('login');
     const [errorLogin, setErrorLogin] = useState<boolean>(false)
     const [errorSignUp, setErrorSignUp] = useState<boolean>(false)
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(userSchema(mode !== 'login')),
+    });
+
+    const onSubmit = (data: any) => {
+        try {
+            const { email, password } = data;
+            if (mode === 'login') {
+                loginUser.mutate({ email: email, password: password })
+            }
+        } catch (error) {
+
+        }
+        console.log(data, mode);
+    };
+
+    const onErrors = (errors: any) => console.error(errors);
 
     const label = mode === 'login' ? 'Log in' : 'Sign up'
     const emailRef = useRef<HTMLInputElement>(null);
@@ -19,6 +56,15 @@ const LoginPage = () => {
     const confirmPasswordRef = useRef<HTMLInputElement>(null);
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const loginUser = useMutation({
+        mutationFn: (userData: User) => login(userData.email, userData.password),
+        onSuccess: (data) => {
+            dispatch(setUser(data.user))
+            navigate('/home')
+        },
+        onError: () => setErrorLogin(true),
+    })
 
     const mutation = useMutation({
         mutationFn: () => login(emailRef.current?.value || '', passwordRef.current?.value || ''),
@@ -65,26 +111,35 @@ const LoginPage = () => {
         })
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setErrorLogin(false)
         setErrorSignUp(false)
-    },[ mode ])
+    }, [mode])
 
     return (
-        <div className="root">
-            <div className="card">
-                <div className="title">{label}</div>
-                <div className="message">Enter your email and password to {`${mode === 'login' ? 'access' : 'create'}`} your account</div>
-                <div className="error-message">{errorLogin && 'Invalid credentials'}</div>
-                <Input label='Email' inputRef={emailRef} />
-                <Input type='password' label='Password' inputRef={passwordRef} />
-                { mode !== 'login' && <Input type='password' error={errorSignUp} label='Confirm password' inputRef={confirmPasswordRef} />}
-                <Button label={`${label}`} handleClick={handleMutation} />
-                <div className="message">
-                    Don't have an account? <a onClick={changeMode}>{mode === 'login' ? 'Sign up' : 'Log in'}</a>
+        <form onSubmit={handleSubmit(onSubmit, onErrors)}>
+            <div className="root">
+                <div className="card">
+                    <div className="title">{label}</div>
+                    <div className="message">Enter your email and password to {`${mode === 'login' ? 'access' : 'create'}`} your account</div>
+                    <div className="error-message">{errorLogin && 'Invalid credentials'}</div>
+                    <Input
+                        label='email' register={register}
+                        error={isTrue(errors.email)} errorMessage={errors.email?.message} />
+                    <Input
+                        type='password' label='password' register={register}
+                        error={isTrue(errors.password)} errorMessage={errors.password?.message} />
+                    {mode !== 'login' &&
+                        <Input
+                            type='password' label='confirm' register={register}
+                            error={isTrue(errors.confirm)} errorMessage={errors.confirm?.message} />}
+                    <Button label={`${label}`} /*handleClick={handleMutation}*/ />
+                    <div className="message">
+                        Don't have an account? <a onClick={changeMode}>{mode === 'login' ? 'Sign up' : 'Log in'}</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     )
 }
 
