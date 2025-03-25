@@ -18,6 +18,9 @@ const LoginPage = () => {
     const [isLogin, setIsLogin] = useState<boolean>(true);
     const [errorLogin, setErrorLogin] = useState<boolean>(false)
     const [errorSignUp, setErrorSignUp] = useState<boolean>(false)
+    const label = isLogin ? 'Log in' : 'Sign up'
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(userSchema(!isLogin)),
@@ -33,10 +36,6 @@ const LoginPage = () => {
             throw new Error("Error on submit")
         }
     };
-
-    const label = isLogin ? 'Log in' : 'Sign up'
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     const loginUser = useMutation({
         mutationFn: (userData: User) => login(userData.email, userData.password),
