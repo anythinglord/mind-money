@@ -1,6 +1,6 @@
 import './index.css'
 
-export const Landing = () => {
+export const LandingPage = () => {
     return(
         <div>landing</div>
     )
