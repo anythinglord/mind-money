@@ -1,6 +1,8 @@
 :root {
     --main-bg-green: #087e8b;
+    --main-bg-greenc: rgba(8, 126, 139, 0.8);
     --main-bg-greeno: #05636b;
     --main-bg-yellow: #ebf8b8;
+    --main-bg-yellowc: rgba(235, 248, 184, 0.6);
     --main-bg-error: #d64550;
 }

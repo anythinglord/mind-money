@@ -1,0 +1,135 @@
+.land-index {
+    height: 100vh;
+    overflow-y: auto
+}
+
+.land-hero {
+    padding-top: 75px;
+    background-color: var(--main-bg-yellowc);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.land-hero h1 {
+    font-size: 50px;
+    font-weight: 800;
+}
+
+.land-box {
+    width: 950px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.land-box h1 {
+    text-align: center;
+}
+
+.land-box h2 {
+    margin: -25px 0 50px 0;
+    text-align: center;
+    font-weight: 400;
+    font-size: 18px;
+    width: 70%;
+}
+
+.land-box-buttons {
+    width: 450px;
+    display: flex;
+    gap: 30px;
+}
+
+.land-image {
+    margin: 50px 0 100px 0;
+    background-color: var(--main-bg-yellow);
+    width: 95%;
+    height: 700px;
+    border-radius: 10px;
+    box-shadow: 
+        rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, 
+        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+/* LAND FEATURES */
+
+.bg-yellow {
+    background-color: var(--main-bg-yellowc);
+}
+
+.land-features {
+    padding: 100px 0 80px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.land-features h2 {
+    font-size: 28px;
+    color: var(--main-bg-greenc);
+    font-weight: 700;
+}
+
+.land-features h3 {
+    margin: 0 0 70px 0;
+    font-weight: 400;
+    text-align: center;
+    font-size: 16px;
+    width: 40%;
+}
+
+.land-row {
+    display: flex;
+    gap: 40px;
+}
+
+.land-card {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 25px;
+    border-radius: 10px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.land-card b {
+    font-size: 25px;
+}
+
+.land-card-icon {
+    color: var(--main-bg-greenc);
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.land-card-title {
+    color: var(--main-bg-greenc);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.land-card p {
+    color: #000;
+    font-weight: 400;
+}
+
+/* LAND FOOTER */
+
+.land-footer {
+    background-color: var(--main-bg-greenc);
+    padding: 70px 25px 70px 25px;
+    display: flex;
+    justify-content: space-between;
+    gap: 25px
+}
+
+.land-footer-item {
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
