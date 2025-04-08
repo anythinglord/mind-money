@@ -1,0 +1,29 @@
+.btn {
+    border: none;
+    padding: 10px 20px 10px 20px;
+    height: 42px;
+    font-size: 14px;
+    font-weight: 600;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+
+.btn-contained {
+    background-color: #087E8B;
+    color: #fff;
+    &:hover {
+        background-color: var(--main-bg-greenc);
+    }
+}
+
+.btn-outlined {
+    background-color: #fff;
+    color: var(--main-bg-greenc);
+    border: 1px solid var(--main-bg-greenc);
+    &:hover {
+        background-color: var(--main-bg-greencc);
+        color: #000;
+    }
+}

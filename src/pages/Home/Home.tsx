@@ -4,7 +4,7 @@ import { NavBar } from '../../components/NavBar';
 import { CardList } from '../../components/CardList';
 import { HomeCardSections } from '../../data';
 
-const HomePage = () => {
+export const HomePage = () => {
 
     return(
         <div className='index-home'>
