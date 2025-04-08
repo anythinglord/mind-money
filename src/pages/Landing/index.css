@@ -7,7 +7,7 @@
 
 .land-navbar {
     background-color: var(--main-bg-yellowc);
-    padding: 15px;
+    padding: 20px 40px 20px 40px;
     color: var(--main-bg-green);
     font-size: 20px;
     display: flex;
@@ -164,16 +164,48 @@
 
 /* LAND FOOTER */
 
-.land-footer {
-    background-color: var(--main-bg-greenc);
-    padding: 70px 25px 70px 25px;
+.land-footer  {
+    background-color: var(--main-bg-green);
+    padding: 70px 95px 70px 95px;
+}
+
+.land-footer-options {
     display: flex;
     justify-content: space-between;
-    gap: 25px
+    gap: 25px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 25px;    
 }
 
 .land-footer-item {
     display: flex;
     flex-direction: column;
     color: #fff;
+    font-size: 14px;
+    flex-grow: 1;
+}
+
+.land-footer-title {
+    font-weight: 900;
+    margin-bottom: 25px;
+}
+
+.land-footer-option {
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+.land-footer-cookies {
+    color: #fff;
+    font-weight: 300;
+    font-size: 15px;
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;   
+}
+
+.land-footer-cookies-right {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
 }
