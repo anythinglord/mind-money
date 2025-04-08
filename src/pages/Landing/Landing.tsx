@@ -1,24 +1,64 @@
 import { Button } from '../../components/Button'
-import { NavBar } from '../../components/NavBar'
 import './index.css'
 
 export const LandingPage = () => {
-    return(
+
+    interface Plan {
+        name: string
+        price?: string
+        description: string
+        features: string[]
+    }
+
+    const PlanPrices: Plan[] = [
+        {
+            name: 'Free',
+            description: 'Perfect for individuals and small projects.',
+            features: ['Up to 1 project', 'Basic analytics', '24-hour support', '1GB storage']
+        },
+        {
+            name: 'Starter',
+            price: '$2.49',
+            description: 'Ideal for growing teams and businesses.',
+            features: [
+                'Up to 5 projects', 'Advanced analytics', 'Priority support', '10GB storage', 'Custom integrations'
+            ]
+        },
+        {
+            name: 'Professional',
+            description: 'For large organizations with complex needs.',
+            price: '$6.49',
+            features: [
+                'Unlimited everything', 'Advanced analytics', 'Dedicated account manager', 
+                '24/7 phone support',
+                'Custom development'
+            ]
+        }
+    ]
+
+    return (
         <div className='land-index'>
-            <section className='land-header'>
-                <NavBar/>
-            </section>
+            <div className='land-navbar'>
+                <div className='land-nav-logo'>
+                    Mind
+                    <i className="fa-solid fa-money-bill-wave" />
+                    Money
+                </div>
+                <div>center</div>
+                <div><Button label="Get Started" /></div>
+            </div>
+
             <section className='land-hero'>
                 <div className="land-box">
                     <h1>A minimal solution for your maximum potential</h1>
                     <h2>Streamline your workflow with our intuitive platform designed for modern teams.</h2>
                     <div className='land-box-buttons'>
                         <Button label='Start for free' />
-                        <Button label='Learn more' variant='outlined'/>
+                        <Button label='Learn more' variant='outlined' />
                     </div>
                 </div>
                 <div className='land-image'>
-                    
+
                     {/* 
                         <div
                         style={{
@@ -36,27 +76,27 @@ export const LandingPage = () => {
                 <h3>Our platform offers powerful features that help you accomplish more with less effort.</h3>
                 <div className='land-row'>
                     <div className='land-card'>
-                        <i className='land-card-icon fa-solid fa-bolt'/>
+                        <i className='land-card-icon fa-solid fa-bolt' />
                         <div className='land-card-title'>
                             Lightning Fast
                         </div>
-                        <p>Experience unparalleled speed with our optimized platform, 
+                        <p>Experience unparalleled speed with our optimized platform,
                             designed to save you time and boost productivity.</p>
                     </div>
                     <div className='land-card'>
-                        <i className='land-card-icon fa-solid fa-shield'/>
+                        <i className='land-card-icon fa-solid fa-shield' />
                         <div className='land-card-title'>
                             Secure by Default
                         </div>
-                        <p>Experience unparalleled speed with our optimized platform, 
+                        <p>Experience unparalleled speed with our optimized platform,
                             designed to save you time and boost productivity.</p>
                     </div>
                     <div className='land-card'>
-                        <i className='land-card-icon fa-solid fa-circle-check'/>
+                        <i className='land-card-icon fa-solid fa-circle-check' />
                         <div className='land-card-title'>
                             Effortless Integration
                         </div>
-                        <p>Experience unparalleled speed with our optimized platform, 
+                        <p>Experience unparalleled speed with our optimized platform,
                             designed to save you time and boost productivity.</p>
                     </div>
                 </div>
@@ -66,46 +106,44 @@ export const LandingPage = () => {
                 <h3>Don't just take our word for it — hear what our customers have to say.</h3>
                 <div className='land-row'>
                     <div className='land-card'>
-                        <i className='land-card-icon fa-solid fa-bolt'/>
+                        <i className='land-card-icon fa-solid fa-bolt' />
                         <div className='land-card-title'>
                             Lightning Fast
                         </div>
-                        <p>Experience unparalleled speed with our optimized platform, 
+                        <p>Experience unparalleled speed with our optimized platform,
                             designed to save you time and boost productivity.</p>
                     </div>
                     <div className='land-card'>
-                        <i className='land-card-icon fa-solid fa-shield'/>
+                        <i className='land-card-icon fa-solid fa-shield' />
                         Lightning Fast
-                        <p>Experience unparalleled speed with our optimized platform, 
+                        <p>Experience unparalleled speed with our optimized platform,
                             designed to save you time and boost productivity.</p>
                     </div>
                 </div>
             </section>
             <section className='land-features'>
                 <h2>Simple, transparent pricing</h2>
-                <h3>Choose the plan that's right for you and start 
+                <h3>Choose the plan that's right for you and start
                     your 14-day free trial today.</h3>
                 <div className='land-row'>
-                    <div className='land-card'>
-                        <div className='land-card-title'>Free</div>
-                        <p>Experience unparalleled speed with our optimized platform, 
-                            designed to save you time and boost productivity.</p>
-                        <Button label='Start free trial' variant='outlined'/>
-                    </div>
-                    <div className='land-card'>
-                        <div className='land-card-title'>Starter</div>
-                        <b>$2.49</b> /month
-                        <p>Experience unparalleled speed with our optimized platform, 
-                            designed to save you time and boost productivity.</p>
-                        <Button label='Start free trial'/>
-                    </div>
-                    <div className='land-card'>
-                        <div className='land-card-title'>Professional</div>
-                        <b>$5.49</b> /month
-                        <p>Experience unparalleled speed with our optimized platform, 
-                            designed to save you time and boost productivity.</p>
-                        <Button label='Start free trial'/>
-                    </div>
+                    {PlanPrices.map((plan) => (
+                        <div className='land-card'>
+                            <div className='land-card-big-title'>{plan.name}</div>
+                            {plan.price && <div>
+                                <b>{`${plan.price}`}</b> /month
+                            </div>}
+                            <p style={{ color: '#aaa', fontSize: 14 }}>{plan.description}</p>
+                            <div className='land-card-features'>
+                                {plan.features.map((feature)=>(
+                                    <div className='price-feature'>
+                                        <i className="fa-regular fa-circle-check" />
+                                        {feature}
+                                    </div>
+                                ))}
+                            </div>
+                            <Button label='Start free trial' variant='outlined' />
+                        </div>
+                    ))}
                 </div>
             </section>
             <section className='land-footer'>

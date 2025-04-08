@@ -23,6 +23,7 @@
     color: var(--main-bg-greenc);
     border: 1px solid var(--main-bg-greenc);
     &:hover {
-        background-color: transparent;
+        background-color: var(--main-bg-greencc);
+        color: #000;
     }
 }
