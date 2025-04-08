@@ -13,7 +13,7 @@ import { userSchema } from "../../schemas";
 import { User } from "../../models";
 import "./index.css";
 
-const LoginPage = () => {
+export const LoginPage = () => {
 
     const [isLogin, setIsLogin] = useState<boolean>(true);
     const [errorLogin, setErrorLogin] = useState<boolean>(false)
