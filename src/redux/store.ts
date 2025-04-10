@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { Item } from "../models/interfaces";
+import { Item } from "../models";
 import { categorySlice, CategoryState, expensesSlice, userSlice, UserState } from "./states";
 
 export interface AppStore {

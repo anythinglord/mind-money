@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Item } from "../../models/interfaces";
+import { Item } from "../../models";
 import { LocalStorageTypes } from "../../models";
 import { setLocalStorage, getLocalStorage } from "../../utilities"
 
