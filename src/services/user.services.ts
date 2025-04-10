@@ -1,5 +1,5 @@
 import { config } from '../config'
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 
 const url = config.API_URL
 
