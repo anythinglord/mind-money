@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { isTrue } from "../../utils";
 import { useMutation } from "@tanstack/react-query";
 import { ItemCreated, ItemCreatedWithoutCategory } from "../../models";
+import { createExpense } from "../../services";
 
 export const Creator = () => {
 
@@ -26,7 +27,7 @@ export const Creator = () => {
         try {
             console.log(data)
             const { description, amount } = data;
-            createExpense.mutate({ 
+            createNewExpense.mutate({ 
                 description: description, amount: amount, category: stateCategory.name 
             })
         } catch (error) {
@@ -34,12 +35,15 @@ export const Creator = () => {
         }
     }
 
-    const createExpense = useMutation({
-        mutationFn: (expenseData: ItemCreated) => console.log(expenseData),
+    const createNewExpense = useMutation({
+        mutationFn: (expense: ItemCreated) => createExpense(
+            expense.description, expense.amount, expense.category
+        ),
+        
         onSuccess: (data: ItemCreated) => {
             createItem({
-                description: data.description,
-                amount: Number(data.amount),
+                description: data.name,
+                amount: data.amount,
                 category: data.category
             })
             // close dialog
@@ -61,7 +65,7 @@ export const Creator = () => {
                             <List />
                         </div>
                     </div>
-                    <Button label="create" />
+                    <Button type="submit" label="create" />
                 </div>
             </div>    
         </form>

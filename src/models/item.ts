@@ -2,10 +2,10 @@ import { Type } from './interfaces';
 
 export interface Item {
     date: string
-    description: string | undefined
+    description: string
     category: string 
     type: Type
-    amount: number | undefined
+    amount: string 
 }
 
 export type ItemCreated = Pick<Item, 'description' | 'amount' | 'category'>

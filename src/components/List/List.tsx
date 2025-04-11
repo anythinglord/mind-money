@@ -21,7 +21,7 @@ export const List = () => {
 
     return(
         <div className="list-index">
-            <button className={`list-button`} onClick={() => setOpen(prevState => !prevState )}>
+            <button type="button" className={`list-button`} onClick={() => setOpen(prevState => !prevState )}>
                 {selected} 
                 <i className={`fa-solid fa-chevron-${open ? 'up': 'down'}`}></i>
             </button>
