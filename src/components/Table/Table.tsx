@@ -1,4 +1,4 @@
-import { Item } from "../../models/interfaces"
+import { Item } from "../../models"
 import "./index.css"
 
 interface Props {
@@ -18,10 +18,10 @@ export const Table = ({ data }: Props) => {
                 ))}
             </div>
             <div className="table-content">
-                {data.map(({ date, description, category, amount }, index) => (
+                {data.map(({ date, name, category, amount }, index) => (
                     <div className="table-row flex-sp-cen" key={index}>
                         <div className="tbl-column col-left">{date}</div>
-                        <div className="tbl-column">{description}</div>
+                        <div className="tbl-column">{name}</div>
                         <div className="tbl-column">{category}</div>
                         <div className="tbl-column">{amount}</div>
                     </div>

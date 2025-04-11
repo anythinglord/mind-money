@@ -26,7 +26,10 @@ export const Input = ({ type = 'text', label = '', error = false, errorMessage, 
     return(
         <div className="input-root">
             <div className={`input-index ${error ? 'has-error' : ''}`}>
-                <input type={ active ? "text" : type } className='input' placeholder={capitalize(label)} {...register(label)}/>
+                <input 
+                    type={ active ? "text" : type } className='input' 
+                    placeholder={capitalize(label)} {...register(label)} 
+                />
                 {type === 'password' && <i className={`fa-solid fa-eye${active ? '-slash' : ''}`} onClick={changeState}/>}
             </div>
             {error && <div className="input-error">
