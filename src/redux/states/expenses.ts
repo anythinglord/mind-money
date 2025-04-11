@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Item } from "../../models";
 import { LocalStorageTypes } from "../../models";
 import { setLocalStorage, getLocalStorage } from "../../utilities"
@@ -10,11 +10,15 @@ export const expensesSlice = createSlice({
     initialState: getLocalStorage(LocalStorageTypes.EXPENSES) 
         ? JSON.parse(getLocalStorage(LocalStorageTypes.EXPENSES) as string) : initialState,
     reducers: {
-        addExpense: ( _, action) => {
+        addExpense: ( state, action: PayloadAction<Item>) => {
+            state.push(action.payload)
+            setLocalStorage(LocalStorageTypes.EXPENSES, state)
+        },
+        setExpenses: ( state, action: PayloadAction<Item[]>) => {
+            state = action.payload;
             setLocalStorage(LocalStorageTypes.EXPENSES, action.payload)
-            return action.payload
-        } 
+        }, 
     }
 })
 
-export const { addExpense } = expensesSlice.actions;
+export const { addExpense, setExpenses } = expensesSlice.actions;

@@ -11,7 +11,7 @@ import { expenseSchema } from "../../schemas/expense.schema";
 import { useForm } from "react-hook-form";
 import { isTrue } from "../../utils";
 import { useMutation } from "@tanstack/react-query";
-import { ItemCreated, ItemCreatedWithoutCategory } from "../../models";
+import { ItemCreated } from "../../models";
 import { createExpense } from "../../services";
 
 export const Creator = () => {
@@ -23,12 +23,12 @@ export const Creator = () => {
         resolver: zodResolver(expenseSchema),
     });
 
-    const onSubmit = (data: ItemCreatedWithoutCategory) => {
+    const onSubmit = (data: any) => {
         try {
             console.log(data)
-            const { description, amount } = data;
+            const { name, amount } = data;
             createNewExpense.mutate({ 
-                description: description, amount: amount, category: stateCategory.name 
+                name: name, amount: amount, category: stateCategory.name 
             })
         } catch (error) {
             throw new Error("Error on submit")
@@ -37,13 +37,12 @@ export const Creator = () => {
 
     const createNewExpense = useMutation({
         mutationFn: (expense: ItemCreated) => createExpense(
-            expense.description, expense.amount, expense.category
+            expense.name, expense.amount, expense.category
         ),
-        
         onSuccess: (data: ItemCreated) => {
             createItem({
-                description: data.name,
-                amount: data.amount,
+                name: data.name,
+                amount: String(data.amount),
                 category: data.category
             })
             // close dialog
@@ -57,8 +56,8 @@ export const Creator = () => {
             <div className="creator-index">
                 <div className="creator-content">
                     <div className="group">
-                        <Input label="description" register={register} 
-                            error={isTrue(errors.description)}  errorMessage={errors.description?.message} />
+                        <Input label="name" register={register} 
+                            error={isTrue(errors.name)}  errorMessage={errors.name?.message} />
                         <div className="row">
                             <Input label="amount" type="number" register={register} 
                                 error={isTrue(errors.amount)}  errorMessage={errors.amount?.message} />
