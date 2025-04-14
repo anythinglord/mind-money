@@ -7,6 +7,7 @@ import { CardList } from "../../components/CardList"
 import { ExpensesCardSections } from "../../data"
 import { useExpenses } from "../../hooks/useExpenses";
 import "./index.css"
+import { BackDrop } from "../../components/BackDrop"
 
 export const ExpensesPage = () => {
 
@@ -18,6 +19,7 @@ export const ExpensesPage = () => {
             <Dialog title='Create Expense'>
                 <Creator />
             </Dialog>
+            <BackDrop />
             <div className="page-content">
                 <div className="page-title">
                     Expenses Overview
