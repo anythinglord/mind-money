@@ -4,6 +4,7 @@ import { logout } from '../../services';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../../redux/states';
 import './index.css'
+import { backdropCloseSubject$, backdropOpenSubject$ } from '../BackDrop';
 
 interface Option {
     name: string
@@ -23,13 +24,17 @@ export const Avatar = () => {
     const mutation = useMutation({
         mutationFn: () => logout(),
         onSuccess: () => {
-            dispatch(setUser(null))
+            setTimeout(()=>{
+                dispatch(setUser(null))
+                backdropCloseSubject$.setSubject = true
+            },2000)
         },
         onError: (error) => alert("Error: " + error.message),
     });
 
     const handleOptionClick = (option: string) => {
         if (option === 'Log out') {
+            backdropOpenSubject$.setSubject = true
             mutation.mutate()
         }
     }

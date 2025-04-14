@@ -12,12 +12,15 @@ import { isTrue } from "../../utils";
 import { userSchema } from "../../schemas";
 import { User } from "../../models";
 import "./index.css";
+import { backdropCloseSubject$, backdropOpenSubject$ } from "../../components/BackDrop";
 
 export const LoginPage = () => {
 
     const [isLogin, setIsLogin] = useState<boolean>(true);
-    const [errorLogin, setErrorLogin] = useState<boolean>(false)
-    const [errorSignUp, setErrorSignUp] = useState<boolean>(false)
+    const [error, setError] = useState({
+        status: false,
+        message: ''
+    })
     const label = isLogin ? 'Log in' : 'Sign up'
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -28,6 +31,7 @@ export const LoginPage = () => {
 
     const onSubmit = (data: any) => {
         try {
+            backdropOpenSubject$.setSubject = true
             const { email, password } = data;
             isLogin ? loginUser.mutate({ email: email, password: password })
                 : signUpUser.mutate({ email: email, password: password })
@@ -41,9 +45,10 @@ export const LoginPage = () => {
         mutationFn: (userData: User) => login(userData.email, userData.password),
         onSuccess: (data) => {
             dispatch(setUser(data.user))
+            backdropCloseSubject$.setSubject = true
             navigate('/home')
         },
-        onError: () => setErrorLogin(true),
+        onError: () => setError(prev => ({ status: !prev.status, message: 'Invalid credentials'})),
     })
 
     const signUpUser = useMutation({
@@ -54,12 +59,11 @@ export const LoginPage = () => {
                 navigate('/home')
             }
         },
-        onError: (error) => alert("Error: " + error.message),
+        onError: () => setError(prev => ({ status: !prev.status, message: 'Server error'})),
     })
 
     useEffect(() => {
-        setErrorLogin(false)
-        setErrorSignUp(false)
+        setError(prev => ({ ...prev, status: false }))
     }, [isLogin])
 
     return (
@@ -68,8 +72,7 @@ export const LoginPage = () => {
                 <div className="card">
                     <div className="title">{label}</div>
                     <div className="message">Enter your email and password to {`${isLogin ? 'access' : 'create'}`} your account</div>
-                    <div className="error-message">{errorLogin && 'Invalid credentials'}</div>
-                    <div className="error-message">{errorSignUp && 'Server error'}</div>
+                    <div className="error-message">{error && error.message}</div>
                     <Input
                         label='email' register={register}
                         error={isTrue(errors.email)} errorMessage={errors.email?.message} />
