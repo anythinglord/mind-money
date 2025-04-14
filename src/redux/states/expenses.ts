@@ -16,7 +16,7 @@ export const expensesSlice = createSlice({
         },
         setExpenses: ( state, action: PayloadAction<Item[]>) => {
             state = action.payload;
-            setLocalStorage(LocalStorageTypes.EXPENSES, action.payload)
+            setLocalStorage(LocalStorageTypes.EXPENSES, state)
         }, 
     }
 })
