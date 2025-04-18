@@ -4,8 +4,21 @@ import axios from 'axios';
 const url = config.API_URL
 
 export const getUsers = async () => {
-    const response = await axios.get(`${url}/users`);
+    const response = await axios.get(`${url}/users`, {
+        withCredentials: true
+    });
     return response.data;
+}
+
+export const verifySession = async () => {
+    try {
+        const response = await axios.get(`${url}/users/verify_session`, {
+            withCredentials: true
+        });
+        return response.data
+    } catch (error) {
+        throw new Error("Invalid session");
+    }
 }
 
 export const login = async (email: string, password: string) => {
@@ -16,7 +29,6 @@ export const login = async (email: string, password: string) => {
         )
         return response.data;
     } catch (error) {
-        //console.error("Login failed:", error);
         throw new Error("Invalid credentials");
     }
 }
