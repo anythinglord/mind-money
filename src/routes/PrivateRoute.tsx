@@ -31,7 +31,7 @@ const PrivateRoute = ({ }) => {
     
     
     if (!stateUser) {
-        return <Navigate to="/login"/>
+        return <Navigate to="/expired" />
     }
     return <Outlet/>
 }
