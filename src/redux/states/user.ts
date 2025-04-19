@@ -7,6 +7,7 @@ export interface UserState {
     name?: string
     username?: string    
     email?: string
+    timestamp?: string
 }
 
 const initialState: UserState | null = null
@@ -24,8 +25,12 @@ export const userSlice = createSlice({
         setUser: ( _state, action) => {
             setLocalStorage(LocalStorageTypes.USER, action.payload)
             return action.payload
-        } 
+        },
+        setTimeStamp: ( state, action) => {
+            state.timestamp = action.payload
+            setLocalStorage(LocalStorageTypes.USER, { ...state, timestamp: action.payload })
+        }
     }
 })
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setTimeStamp } = userSlice.actions;

@@ -1,14 +1,6 @@
-.root {
-    background-color: #EBF8B8;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .card {
     background-color: #fff;
-    height: 500px;
+    height: 520px;
     width: 25vw;
     display: flex;
     justify-content: center;

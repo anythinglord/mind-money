@@ -24,6 +24,11 @@ html, body {
   align-items: center;
 }
 
+.flex-cen {
+  display: flex;
+  justify-content: center;
+}
+
 .position-end{
   position: absolute;
   left: calc(80vw - 2px);
@@ -50,4 +55,30 @@ html, body {
   font-weight: 700;
   padding: 15px;
   margin-top: 20px;
+}
+
+.page-root {
+  background-color: #EBF8B8;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-card {
+  background-color: #fff;
+  width: 25vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 35px;
+  border-radius: 15px;
+  padding: 50px 25px;
+}
+
+.icon-medium {
+  color: var(--main-bg-green);
+  font-size: 48px;
+
 }

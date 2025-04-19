@@ -68,7 +68,7 @@ export const LoginPage = () => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="root">
+            <div className="page-root">
                 <div className="card">
                     <div className="title">{label}</div>
                     <div className="message">Enter your email and password to {`${isLogin ? 'access' : 'create'}`} your account</div>
