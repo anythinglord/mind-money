@@ -84,7 +84,11 @@ export const LoginPage = () => {
                             type='password' label='confirm' register={register}
                             error={isTrue(errors.confirm)} errorMessage={errors.confirm?.message} />}
                     <Button label={`${label}`} />
+                        
                     <div className="message">
+                        <p>
+                        <a onClick={() => setIsLogin((prevMode) => !prevMode)}>{isLogin ? 'Forgot password?' : ''}</a>
+                        </p>
                         Don't have an account? <a onClick={() => setIsLogin((prevMode) => !prevMode)}>{isLogin ? 'Sign up' : 'Log in'}</a>
                     </div>
                 </div>
