@@ -9,3 +9,5 @@ export interface Section  {
     icon: string
     value: number | string
 }
+
+export type LoginMode = 'login'| 'signup' | 'forgot'

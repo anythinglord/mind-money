@@ -1,7 +1,12 @@
 import './index.css'
+import { LoginMode } from '../../models'
 
-export const ForgotPasswordForm = () => {
+interface Props {
+    onSwitch: (mode: LoginMode) => void
+}
+
+export const ForgotPasswordForm = ({ onSwitch }: Props) => {
     return(
-        <div></div>
+        <div>forgot</div>
     )
 }
