@@ -4,7 +4,6 @@ import { Input } from '../Input'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import './index.css'
 import { userSchema } from '../../schemas';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
@@ -13,13 +12,14 @@ import { backdropCloseSubject$, backdropOpenSubject$ } from "../BackDrop";
 import { setUser } from '../../redux/states';
 import { login, signup } from '../../services';
 import { Button } from '../Button';
+import './index.css'
 
 interface Props {
     mode?: LoginMode
     onSwitch: (mode: LoginMode) => void
 }
 
-export const LoginForm = ({ mode, onSwitch }: Props) => {
+export const AuthForm = ({ mode, onSwitch }: Props) => {
     
     const [error, setError] = useState({
             status: false,
