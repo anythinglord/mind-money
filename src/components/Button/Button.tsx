@@ -7,7 +7,7 @@ interface Props {
     handleClick?: () => void
 }
 
-export const Button = ({ label = 'button', type = undefined , variant = 'contained', handleClick }: Props) => {
+export const Button = ({ label = 'button', type = "button" , variant = 'contained', handleClick }: Props) => {
     return (
         <button type={type} className={`btn btn-${variant}`} onClick={handleClick}>{label}</button>
     )
