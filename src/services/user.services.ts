@@ -21,6 +21,19 @@ export const verifySession = async () => {
     }
 }
 
+export const verifyEmail = async (email: string) => {
+    try {
+        console.log('verifying email', email)
+        const response = await axios.post(`${url}/users/verify_email`,
+            { email },
+            { withCredentials: true }
+        )
+        return response.data
+    } catch (error) {
+        throw new Error("Account not found");
+    }  
+}
+
 export const login = async (email: string, password: string) => {
     try {
         const response = await axios.post(`${url}/users/login`,
