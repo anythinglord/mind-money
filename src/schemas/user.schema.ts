@@ -24,6 +24,12 @@ export const userSchema = (isSignUp: boolean) =>
 export const recoverAccountSchema = (step: number) =>
     z.object({
         email: z.string().email("Invalid email"),
+        input1: step === 2 ? z.string() : z.optional(z.string()),
+        input2: step === 2 ? z.string() : z.optional(z.string()),
+        input3: step === 2 ? z.string() : z.optional(z.string()),
+        input4: step === 2 ? z.string() : z.optional(z.string()),
+        input5: step === 2 ? z.string() : z.optional(z.string()),
+        input6: step === 2 ? z.string() : z.optional(z.string()),
         password: step === 3 ? zodEmail : z.optional(zodEmail),
         confirm: step === 3 ? z.string() : z.optional(z.string()),
     }).refine((data) => {

@@ -21,16 +21,27 @@ export const verifySession = async () => {
     }
 }
 
-export const verifyEmail = async (email: string) => {
+export const forgotPassword = async (email: string) => {
     try {
-        console.log('verifying email', email)
-        const response = await axios.post(`${url}/users/verify_email`,
+        const response = await axios.post(`${url}/users/forgot_password`,
             { email },
             { withCredentials: true }
         )
         return response.data
     } catch (error) {
-        throw new Error("Account not found");
+        throw new Error("Error verifying email");
+    }  
+}
+
+export const verifyOTP = async (email: string, token: string) => {
+    try {
+        const response = await axios.post(`${url}/users/verify_otp`,
+            { email, token },
+            { withCredentials: true }
+        )
+        return response.data
+    } catch (error) {
+        throw new Error("Error verifying token");
     }  
 }
 
