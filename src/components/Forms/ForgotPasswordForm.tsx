@@ -13,6 +13,8 @@ import './index.css'
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStore } from '../../redux/store';
 import { setEmail } from '../../redux/states';
+import { Message } from '../Message';
+import { useError } from '../../hooks/useError';
 interface Props {
     onSwitch: (mode: LoginMode) => void
 }
@@ -31,15 +33,16 @@ export const ForgotPasswordForm = ({ onSwitch }: Props) => {
 
     const stateUser = useSelector((store: AppStore) => store.user)
     const [step, setStep] = useState<number>(1);
-    const [countDown, setCount] = useState<number>(8);
+    const [countDown, setCount] = useState<number>(60);
     const dispatch = useDispatch()
+    const { filters, dispatchField } = useError();
     
     const { register, handleSubmit, setError, formState: { errors } } = useForm({
         resolver: zodResolver(recoverAccountSchema(step)),
     });
 
     const onSubmit = (data: any) => {
-        //backdropOpenSubject$.setSubject = true
+        backdropOpenSubject$.setSubject = true
         if (step === 1) {
             const { email } = data; 
             dispatch(setEmail(email)); // set email to use once in resendOTP
@@ -49,9 +52,14 @@ export const ForgotPasswordForm = ({ onSwitch }: Props) => {
             const { email } = data;
             const token = concatWithExclude('email', data)
             if (token.length === 6) {
+                dispatchField('error', false) // remove error message 
                 verifyInputToken.mutate({ email: email, token: token })
             }
         }
+        /*if (step === 3) {
+            const { password } = data;
+
+        }*/
     }
 
     const resendOTP = () => {
@@ -79,20 +87,23 @@ export const ForgotPasswordForm = ({ onSwitch }: Props) => {
 
     const verifyInputToken = useMutation({
         mutationFn: (data: TokenVerify) => verifyOTP(data.email, data.token),
-        onSuccess: (response) => {
-            /*setTimeout(()=>{
+        onSuccess: () => {
+            setTimeout(() => {
                 setStep((prevStep) => prevStep + 1)
                 backdropCloseSubject$.setSubject = true 
-            },1500)*/
+            },1500)
         },
         onError: (error) => {
             backdropCloseSubject$.setSubject = true
-            setError('input1', {
-                type: "custom",
-                message: error.message,
-            });
+            dispatchField('error', true)
+            if (error.message === 'wrong token') 
+                dispatchField('message', 'The code you entered is invalid. Please try again')
         }
     })
+
+    /*const changePassword = useMutation({
+
+    })*/
 
     useEffect(() => {
 
@@ -101,7 +112,7 @@ export const ForgotPasswordForm = ({ onSwitch }: Props) => {
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [])
+    }, [step])
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='form-container'>
@@ -109,6 +120,7 @@ export const ForgotPasswordForm = ({ onSwitch }: Props) => {
             <div className="message">
                 {step === 1 && 'Enter your email to find your account '}
                 {step === 2 && 'Verify the 6 digit code in the email'}
+                {step === 3 && 'Enter a new password below to change your password'}
             </div>
             {step === 1 && <>
                 <Input
@@ -120,6 +132,7 @@ export const ForgotPasswordForm = ({ onSwitch }: Props) => {
                 </div>
             </>}
             {step === 2 && <>
+                {filters.error && <Message message={filters.message} />}
                 <InputCode register={register} />
                 {countDown > 0 ? <b>Code expires on {countDown}</b> :
                     <Button variant='text' type="button" label="Resend code" handleClick={resendOTP}/>}
@@ -128,6 +141,18 @@ export const ForgotPasswordForm = ({ onSwitch }: Props) => {
                     <Button label='Verify' type='submit' />
                 </div>
             </>}
+            {/*step === 3 && <>
+                <Input
+                type='password' label='password' register={register}
+                error={isTrue(errors.password)} errorMessage={errors.password?.message} />
+                <Input
+                type='password' label='confirm' register={register}
+                error={isTrue(errors.confirm)} errorMessage={errors.confirm?.message} />
+                <div className='box-h-large'>
+                    <Button label='Cancel' variant='outlined' handleClick={() => setStep((prevStep) => prevStep - 1)} />
+                    <Button label='Change password' type='submit' />
+                </div>
+            </>*/}
         </form>
     )
 }
