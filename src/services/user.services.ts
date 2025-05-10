@@ -21,10 +21,10 @@ export const verifySession = async () => {
     }
 }
 
-export const forgotPassword = async (email: string) => {
+export const forgotPassword = async (email: string, refresh: boolean) => {
     try {
         const response = await axios.post(`${url}/users/forgot_password`,
-            { email },
+            { email, refresh },
             { withCredentials: true }
         )
         return response.data
@@ -40,8 +40,13 @@ export const verifyOTP = async (email: string, token: string) => {
             { withCredentials: true }
         )
         return response.data
-    } catch (error) {
-        throw new Error("Error verifying token");
+    } catch (error: unknown) {
+        if (axios.isAxiosError(error)) {
+            if (error.response && error.response.data && error.response.data.message) {
+                throw new Error(error.response.data.message)
+            } 
+          }
+        //throw new Error("Error verifying otp");
     }  
 }
 
