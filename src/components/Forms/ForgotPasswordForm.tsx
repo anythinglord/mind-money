@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { LoginMode } from '../../models'
+import { LoginMode, User } from '../../models'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { recoverAccountSchema } from '../../schemas';
 import { useForm } from 'react-hook-form';
@@ -7,7 +7,7 @@ import { Input, InputCode } from '../Input';
 import { concatWithExclude, isTrue } from '../../utils';
 import { useMutation } from '@tanstack/react-query';
 import { Button } from '../Button';
-import { forgotPassword, verifyOTP } from '../../services';
+import { forgotPassword, resetPassword, verifyOTP } from '../../services';
 import { backdropCloseSubject$, backdropOpenSubject$ } from "../BackDrop";
 import './index.css'
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,10 +56,10 @@ export const ForgotPasswordForm = ({ onSwitch }: Props) => {
                 verifyInputToken.mutate({ email: email, token: token })
             }
         }
-        /*if (step === 3) {
+        if (step === 3) {
             const { password } = data;
-
-        }*/
+            onResetPassword.mutate({ email: stateUser.email, password: password })
+        }
     }
 
     const resendOTP = () => {
@@ -101,9 +101,19 @@ export const ForgotPasswordForm = ({ onSwitch }: Props) => {
         }
     })
 
-    /*const changePassword = useMutation({
-
-    })*/
+    const onResetPassword = useMutation({
+        mutationFn: (user: User) => resetPassword(user.email, user.password),
+        onSuccess: () => {
+            setTimeout(() => {
+                setStep((prevStep) => prevStep + 1)
+                backdropCloseSubject$.setSubject = true 
+            },1500)
+        },
+        onError: (error) => {
+            backdropCloseSubject$.setSubject = true
+            console.log(error)
+        }
+    })
 
     useEffect(() => {
 
@@ -141,18 +151,22 @@ export const ForgotPasswordForm = ({ onSwitch }: Props) => {
                     <Button label='Verify' type='submit' />
                 </div>
             </>}
-            {/*step === 3 && <>
+            {step === 3 && <>
                 <Input
                 type='password' label='password' register={register}
                 error={isTrue(errors.password)} errorMessage={errors.password?.message} />
                 <Input
                 type='password' label='confirm' register={register}
                 error={isTrue(errors.confirm)} errorMessage={errors.confirm?.message} />
-                <div className='box-h-large'>
-                    <Button label='Cancel' variant='outlined' handleClick={() => setStep((prevStep) => prevStep - 1)} />
+                <div className='box-h-large mt-20'>
+                    <Button label='Cancel' variant='outlined' handleClick={() => onSwitch('login')} />
                     <Button label='Change password' type='submit' />
                 </div>
-            </>*/}
+            </>}
+            {step === 4 && <>
+                <p>The password was changed successfully</p>
+                <Button label='Go to login' handleClick={() => onSwitch('login')} />
+            </>}
         </form>
     )
 }

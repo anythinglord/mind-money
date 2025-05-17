@@ -50,6 +50,18 @@ export const verifyOTP = async (email: string, token: string) => {
     }  
 }
 
+export const resetPassword = async (email: string, password: string) => {
+    try {
+        const response = await axios.post(`${url}/users/reset_password`,
+            { email, password },
+            { withCredentials: true }
+        )
+        return response.data
+    } catch (error: unknown) {
+        throw new Error("Server Error");
+    }  
+}
+
 export const login = async (email: string, password: string) => {
     try {
         const response = await axios.post(`${url}/users/login`,

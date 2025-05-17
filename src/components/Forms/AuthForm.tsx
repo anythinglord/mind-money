@@ -40,6 +40,7 @@ export const AuthForm = ({ mode, onSwitch }: Props) => {
         try {
             backdropOpenSubject$.setSubject = true
             const { email, password } = data;
+            console.log(email, password)
             isLogin ? loginUser.mutate({ email: email, password: password })
                 : signUpUser.mutate({ email: email, password: password })
 
@@ -92,7 +93,7 @@ export const AuthForm = ({ mode, onSwitch }: Props) => {
                 <Input
                     type='password' label='confirm' register={register}
                     error={isTrue(errors.confirm)} errorMessage={errors.confirm?.message} />}
-            <Button label={`${label}`} />
+            <Button label={`${label}`} type='submit'/>
             <div className="message">
                 <p>
                     <a onClick={() => onSwitch('forgot')}>{isLogin ? 'Forgot password?' : ''}</a>

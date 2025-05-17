@@ -11,7 +11,11 @@ html, body {
 }
 
 .mt-50 {
-  margin-top: 50px
+  margin-top: 50px;
+}
+
+.mt-20 {
+  margin-top: 20px;
 }
 
 .color-white {
