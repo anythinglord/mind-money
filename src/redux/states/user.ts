@@ -33,11 +33,11 @@ export const userSlice = createSlice({
             state.email = action.payload
             setLocalStorage(LocalStorageTypes.USER, { ...state, email: action.payload })
         },
-        setTimeStamp: ( state, action) => {
-            state.timestamp = action.payload
-            setLocalStorage(LocalStorageTypes.USER, { ...state, timestamp: action.payload })
-        }
+        setId: ( state, action) => {
+            state.id = action.payload
+            setLocalStorage(LocalStorageTypes.USER, { ...state, id: action.payload })
+        },
     }
 })
 
-export const { setUser, setEmail, setTimeStamp } = userSlice.actions;
+export const { setUser, setEmail, setId } = userSlice.actions;
