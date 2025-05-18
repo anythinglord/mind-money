@@ -10,6 +10,14 @@
     
 }
 
+.btn-text {
+    padding: 5px;
+    height: 30px;
+    background-color: #fff;
+    color: var(--main-bg-greenc);
+    width: auto;
+}
+
 .btn-contained {
     background-color: #087E8B;
     color: #fff;

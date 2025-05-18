@@ -30,7 +30,7 @@ const PrivateRoute = ({ }) => {
     },[])
     
     
-    if (!stateUser) {
+    if (!stateUser.id) {
         return <Navigate to="/expired" />
     }
     return <Outlet/>

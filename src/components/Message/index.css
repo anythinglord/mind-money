@@ -1,0 +1,14 @@
+.message-root {
+    border: 1px solid var(--main-bg-error);
+    padding: 12px;
+    border-radius: 10px;
+    color: var(--main-bg-error);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 13px;
+}
+
+.message-root i {
+    font-size: 20px;
+}
