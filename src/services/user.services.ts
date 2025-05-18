@@ -89,7 +89,7 @@ export const signup = async (email: string, password: string) => {
 
 export const logout = async () => {
     try {
-        const response = await axios.post(`${url}/users/logout`)
+        const response = await axios.get(`${url}/users/logout`, { withCredentials: true })
         return response.data;
     } catch (error) {
         //console.error("Logout failed:", error);
