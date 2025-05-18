@@ -10,6 +10,14 @@ html, body {
   font-family: Menlo, monospace; 
 }
 
+.mt-50 {
+  margin-top: 50px;
+}
+
+.mt-20 {
+  margin-top: 20px;
+}
+
 .color-white {
   color: white;
 }
@@ -80,5 +88,11 @@ html, body {
 .icon-medium {
   color: var(--main-bg-green);
   font-size: 48px;
+}
 
+/* BOXES */
+.box-h-large {
+  display: flex;
+  width: 100%;
+  gap: 50px;
 }

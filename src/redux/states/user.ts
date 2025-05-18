@@ -6,11 +6,13 @@ export interface UserState {
     id?: string
     name?: string
     username?: string    
-    email?: string
+    email: string
     timestamp?: string
 }
 
-const initialState: UserState | null = null
+const initialState: UserState | null = {
+    email: ''
+}
 
 const initialStateTest = () => {
     const localStorageData = getLocalStorage(LocalStorageTypes.USER) 
@@ -23,8 +25,13 @@ export const userSlice = createSlice({
     initialState: initialStateTest(),
     reducers: {
         setUser: ( _state, action) => {
-            setLocalStorage(LocalStorageTypes.USER, action.payload)
+            const user = action.payload === null ? initialState : action.payload
+            setLocalStorage(LocalStorageTypes.USER, user)
             return action.payload
+        },
+        setEmail: ( state, action) => {
+            state.email = action.payload
+            setLocalStorage(LocalStorageTypes.USER, { ...state, email: action.payload })
         },
         setTimeStamp: ( state, action) => {
             state.timestamp = action.payload
@@ -33,4 +40,4 @@ export const userSlice = createSlice({
     }
 })
 
-export const { setUser, setTimeStamp } = userSlice.actions;
+export const { setUser, setEmail, setTimeStamp } = userSlice.actions;

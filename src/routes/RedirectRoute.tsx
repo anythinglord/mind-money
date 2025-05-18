@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 const RedirectRoute = ({ }) => {
 
     const stateUser = useSelector((store: AppStore) => store.user)
-    if (stateUser) {
+    if (stateUser.id) {
         return <Navigate to="/home" />
     }
     return <Outlet/>
