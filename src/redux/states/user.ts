@@ -25,7 +25,8 @@ export const userSlice = createSlice({
     initialState: initialStateTest(),
     reducers: {
         setUser: ( _state, action) => {
-            setLocalStorage(LocalStorageTypes.USER, action.payload)
+            const user = action.payload === null ? initialState : action.payload
+            setLocalStorage(LocalStorageTypes.USER, user)
             return action.payload
         },
         setEmail: ( state, action) => {
