@@ -13,6 +13,7 @@ import { isTrue } from "../../utils";
 import { useMutation } from "@tanstack/react-query";
 import { ItemCreated } from "../../models";
 import { createExpense } from "../../services";
+import { formatDate } from "../../utils";
 
 export const Creator = () => {
 
@@ -43,7 +44,8 @@ export const Creator = () => {
             createItem({
                 name: data.name,
                 amount: String(data.amount),
-                category: data.category
+                category: data.category,
+                createdAt: formatDate(data.createdAt)
             })
             // close dialog
             dialogCloseSubject$.setSubject = true;

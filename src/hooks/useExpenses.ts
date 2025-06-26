@@ -17,10 +17,9 @@ export const useExpenses = () => {
     const dispatch = useDispatch()
     
     const createNewItem = (data: ItemCreated) => {
-        const { name, amount, category } = data;
-        console.log('creating new item :', data)
+        const { name, amount, category, createdAt } = data;
         const newItem: Item = { 
-            date: '2025-02-13',
+            createdAt: createdAt,
             name: name,
             category: category,
             type:  Type.Expenses,

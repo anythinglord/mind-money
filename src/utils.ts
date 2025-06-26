@@ -4,6 +4,10 @@ export const isTrue = (expression: any) => {
     return expression ? true : false
 }
 
+export const formatDate = (date: string | undefined) => {
+    return date?.slice(0,10)
+}
+
 export const capitalize = (val: string) => 
     String(val).charAt(0).toUpperCase() + String(val).slice(1);
 
