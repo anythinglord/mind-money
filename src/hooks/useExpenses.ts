@@ -1,17 +1,19 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Item, ItemCreated, Type } from '../models'
 import { useDispatch, useSelector } from "react-redux"
 import { AppStore } from "../redux/store"
 import { addExpense, setExpenses } from "../redux/states"
 import { useMutation } from "@tanstack/react-query"
 import { getExpenses } from "../services"
+import { filterItemsByCategory, filterItemsBySearchName } from "../utils"
 
 export const useExpenses = () => {
     
     const stateCategory = useSelector((store: AppStore) => store.category)
     const categoryName = stateCategory.name;
+    const searchName = stateCategory.searchName
     const stateExpenses = useSelector((store: AppStore) => store.expenses)
-    // const [items, setItems] = useState<Item[]>(stateExpenses)
+    const [items, setItems] = useState<Item[]>(stateExpenses)
     const dispatch = useDispatch()
     
     const createNewItem = (data: ItemCreated) => {
@@ -31,28 +33,41 @@ export const useExpenses = () => {
         mutationFn: () => getExpenses(),
         onSuccess: (response) => {
             const { expenses } = response
-            console.log(expenses)
             dispatch(setExpenses(expenses))
         },
         onError: () => console.log('error load expenses')
     })
 
-    useEffect(()=>{
+    useEffect(() => {
         getExpensesMutation.mutate()
     },[])
 
     useEffect(()=>{
-        if (categoryName === 'All categories') {
-            //setItems(stateExpenses)
+        if (searchName !== '') {
+            const itemsFilteredByCategory = filterItemsByCategory(stateExpenses, categoryName)
+            const itemsFilteredBySearchName = filterItemsBySearchName(itemsFilteredByCategory, searchName)
+            setItems(itemsFilteredBySearchName)
         } else {
-            // const filteredItems = [...stateExpenses].filter((item) => item.category === categoryName)
-            //setItems(filteredItems)
-            // dispatch(setExpenses(filteredItems))
+            const filteredItems = filterItemsByCategory(stateExpenses, categoryName)
+            setItems(filteredItems)
+        }
+    },[searchName])
+
+    useEffect(()=>{
+        if (categoryName === 'All categories') {
+            const itemsFilteredBySearchName = filterItemsBySearchName(stateExpenses, searchName)
+            setItems(itemsFilteredBySearchName)
+        } else {
+            if (categoryName) {
+                const itemsFilteredByCategory = filterItemsByCategory(stateExpenses, categoryName)
+                const itemsFilteredBySearchName = filterItemsBySearchName(itemsFilteredByCategory, searchName)
+                setItems(itemsFilteredBySearchName)
+            }
         }
     },[categoryName])
 
     return {
-        expenses: stateExpenses,
+        expenses: items,
         createItem: createNewItem
     }
 }
