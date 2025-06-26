@@ -43,8 +43,22 @@
 }
 
 .tbl-column {
-    width: 25%;
+    width: 23%;
     text-align: right;
+}
+
+.tbl-column-tiny {
+    width: 8%;
+    padding-right: 15px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    height: 17px;
+    
+}
+.mr-15 {
+    margin-right: 15px;
 }
 
 .col-left {
