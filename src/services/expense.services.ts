@@ -1,3 +1,4 @@
+import { catchError } from '../utils';
 import { config } from '../config'
 import axios from 'axios';
 
@@ -6,10 +7,15 @@ const activeWorkSpace: string = '67f9274880d73be2ade586aa';
 
 export const getExpenses = async () => {
     
-    const response = await axios.get(`${url}/expenses/${activeWorkSpace}` , {
+    const request = axios.get(`${url}/expenses/${activeWorkSpace}` , {
         withCredentials: true
     });
-    return response.data;
+    const [response, error] = await catchError(request)
+    if (error) {
+        console.error("Error getting expenses:", error);
+        throw new Error("Error getting expense");
+    }
+    return response?.data;
 }
 
 export const createExpense = async (name: string, amount: string, category: string) => {

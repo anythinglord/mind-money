@@ -2,7 +2,9 @@ import { useEffect } from "react"
 import { Item, ItemCreated, Type } from '../models'
 import { useDispatch, useSelector } from "react-redux"
 import { AppStore } from "../redux/store"
-import { addExpense } from "../redux/states"
+import { addExpense, setExpenses } from "../redux/states"
+import { useMutation } from "@tanstack/react-query"
+import { getExpenses } from "../services"
 
 export const useExpenses = () => {
     
@@ -24,6 +26,20 @@ export const useExpenses = () => {
         }
         dispatch(addExpense(newItem))
     }
+    
+    const getExpensesMutation = useMutation({
+        mutationFn: () => getExpenses(),
+        onSuccess: (response) => {
+            const { expenses } = response
+            console.log(expenses)
+            dispatch(setExpenses(expenses))
+        },
+        onError: () => console.log('error load expenses')
+    })
+
+    useEffect(()=>{
+        getExpensesMutation.mutate()
+    },[])
 
     useEffect(()=>{
         if (categoryName === 'All categories') {

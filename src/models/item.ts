@@ -1,7 +1,8 @@
 import { Type } from './interfaces';
 
 export interface Item {
-    date: string
+    createdAt?: string
+    date?: string
     name: string
     category: string 
     type: Type

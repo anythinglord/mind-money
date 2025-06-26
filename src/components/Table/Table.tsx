@@ -18,9 +18,9 @@ export const Table = ({ data }: Props) => {
                 ))}
             </div>
             <div className="table-content">
-                {data.map(({ date, name, category, amount }, index) => (
+                {data.map(({ createdAt, name, category, amount }, index) => (
                     <div className="table-row flex-sp-cen" key={index}>
-                        <div className="tbl-column col-left">{date}</div>
+                        <div className="tbl-column col-left">{createdAt?.slice(0,10)}</div>
                         <div className="tbl-column">{name}</div>
                         <div className="tbl-column">{category}</div>
                         <div className="tbl-column">{amount}</div>
