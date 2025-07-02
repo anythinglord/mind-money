@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../Button'
 import { dialogOpenSubject$ } from '../Dialog'
 import { List } from '../List'
-import { setSearchName } from '../../redux/states'
+import { changeMode, setSearchName } from '../../redux/states'
 import { AppStore } from '../../redux/store'
 import './index.css'
 
@@ -14,6 +14,7 @@ export const Filter = () => {
     
     const handleClick = () => {
         // open dialog
+        dispatch(changeMode('create'))
         dialogOpenSubject$.setSubject = true;
     }
 

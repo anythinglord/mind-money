@@ -5,10 +5,14 @@ import { setCategory } from "../../redux/states/category"
 import { AppStore } from "../../redux/store"
 import "./index.css"
 
-export const List = () => {
+interface Props {
+    value?: string
+}
+
+export const List = ({ value = Categories[0] }: Props) => {
     
     const stateCategory = useSelector((store: AppStore) => store.category)
-    const initialValue = stateCategory.name || Categories[0];
+    const initialValue = stateCategory.name || value;
     const [selected, setSelected] = useState<string>(initialValue)
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
