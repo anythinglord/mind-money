@@ -13,7 +13,9 @@ export const useExpenses = () => {
     const categoryName = stateCategory.name;
     const searchName = stateCategory.searchName
     const stateExpenses = useSelector((store: AppStore) => store.expenses)
-    const [items, setItems] = useState<Item[]>(stateExpenses)
+    const expenseItems = stateExpenses.items
+
+    const [items, setItems] = useState<Item[]>(expenseItems)
     const dispatch = useDispatch()
     
     const createNewItem = (data: ItemCreated) => {
@@ -43,22 +45,22 @@ export const useExpenses = () => {
 
     useEffect(()=>{
         if (searchName !== '') {
-            const itemsFilteredByCategory = filterItemsByCategory(stateExpenses, categoryName)
+            const itemsFilteredByCategory = filterItemsByCategory(expenseItems, categoryName)
             const itemsFilteredBySearchName = filterItemsBySearchName(itemsFilteredByCategory, searchName)
             setItems(itemsFilteredBySearchName)
         } else {
-            const filteredItems = filterItemsByCategory(stateExpenses, categoryName)
+            const filteredItems = filterItemsByCategory(expenseItems, categoryName)
             setItems(filteredItems)
         }
     },[searchName])
 
     useEffect(()=>{
         if (categoryName === 'All categories') {
-            const itemsFilteredBySearchName = filterItemsBySearchName(stateExpenses, searchName)
+            const itemsFilteredBySearchName = filterItemsBySearchName(expenseItems, searchName)
             setItems(itemsFilteredBySearchName)
         } else {
             if (categoryName) {
-                const itemsFilteredByCategory = filterItemsByCategory(stateExpenses, categoryName)
+                const itemsFilteredByCategory = filterItemsByCategory(expenseItems, categoryName)
                 const itemsFilteredBySearchName = filterItemsBySearchName(itemsFilteredByCategory, searchName)
                 setItems(itemsFilteredBySearchName)
             }

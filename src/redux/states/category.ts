@@ -1,16 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Item } from "../../models";
 import { LocalStorageTypes } from "../../models";
 import { setLocalStorage, getLocalStorage } from "../../utilities"
 
 export interface CategoryState {
     name: string
-    items: Item[]
     searchName: string
 }
 const initialState: CategoryState = {
     name: '',
-    items: [],
     searchName: ''
 }
 
