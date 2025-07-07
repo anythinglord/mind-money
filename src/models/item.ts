@@ -6,9 +6,11 @@ export interface Item {
     name: string
     category: string 
     type: Type
-    amount: string 
+    amount: string
+    updatedAt?: string
+    workSpaceId?: string 
 }
 
 export type ItemCreated = Pick<Item, 'name' | 'amount' | 'category' | 'createdAt'>
-export type ItemToModify = Pick<Item, 'id' | 'name' | 'amount' | 'category'>
+export type ItemToModify = Pick<Item, 'id'| 'category' > & Partial<Pick<Item, 'name' | 'amount'>>
 export type ItemCreatedWithoutCategory = Pick<Item, 'name' | 'amount' >

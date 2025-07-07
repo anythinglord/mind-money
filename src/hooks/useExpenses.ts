@@ -5,7 +5,7 @@ import { AppStore } from "../redux/store"
 import { addExpense, setExpenses } from "../redux/states"
 import { useMutation } from "@tanstack/react-query"
 import { getExpenses } from "../services"
-import { filterItemsByCategory, filterItemsBySearchName } from "../utils"
+import { filterItemsByCategory, filterItemsBySearchName, getIndex, replaceItemByIndex } from "../utils"
 
 export const useExpenses = () => {
     
@@ -18,6 +18,13 @@ export const useExpenses = () => {
     const [items, setItems] = useState<Item[]>(expenseItems)
     const dispatch = useDispatch()
     
+    const updateItem = (itemModified: Item) => {
+        const index = getIndex(expenseItems, itemModified)
+        const expensesUpdated = replaceItemByIndex(expenseItems, index, itemModified)
+        dispatch(setExpenses(expensesUpdated))
+        setItems(expensesUpdated)
+    }
+
     const createNewItem = (data: ItemCreated) => {
         const { name, amount, category, createdAt } = data;
         const newItem: Item = { 
@@ -69,6 +76,7 @@ export const useExpenses = () => {
 
     return {
         expenses: items,
-        createItem: createNewItem
+        createItem: createNewItem,
+        updateItem: updateItem
     }
 }

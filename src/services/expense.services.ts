@@ -1,5 +1,6 @@
 import { catchError } from '../utils';
 import { config } from '../config'
+import { ItemToModify } from '../models';
 import axios from 'axios';
 
 const url = config.API_URL
@@ -30,4 +31,17 @@ export const createExpense = async (name: string, amount: string, category: stri
         console.error("Error creating expense:", error);
         throw new Error("Error creating expense");
     }
+}
+
+export const editExpense = async (data: ItemToModify) => {
+    const request = axios.patch(`${url}/expenses`,
+        { id: data.id, name: data.name, amount: data.amount, category: data.category },
+        { withCredentials: true }
+    )
+    const [response, error] = await catchError(request)
+    if (error) {
+        console.error("Error updating expense:", error);
+        throw new Error("Error updating expens");
+    }
+    return response?.data;
 }

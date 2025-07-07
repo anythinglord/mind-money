@@ -7,12 +7,13 @@ import "./index.css"
 
 interface Props {
     value?: string
+    isEditMode?: boolean
 }
 
-export const List = ({ value = Categories[0] }: Props) => {
+export const List = ({ value = Categories[0], isEditMode = false }: Props) => {
     
     const stateCategory = useSelector((store: AppStore) => store.category)
-    const initialValue = stateCategory.name || value;
+    const initialValue = isEditMode ? value : stateCategory.name;
     const [selected, setSelected] = useState<string>(initialValue)
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch()

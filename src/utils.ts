@@ -15,6 +15,7 @@ export const concatWithExclude = (exclude: string, data: any[]) => {
     return Object.entries(data)
         .filter(([key, _]) => key !== exclude).map(([_, value]) => value).join('');
 }
+
 export const catchError = async <T>(promise: Promise<T>): Promise<[T | null, unknown]> => {
     try {
         const data = await promise;
@@ -52,4 +53,21 @@ export const filterItemsBySearchName = (items: Item[], searchName: string) => {
     }
     const filteredItems = [...items]
     return filteredItems.filter((item) => item.name.includes(searchName))
+}
+
+/**
+ * Replace an existing item in array 
+ * @param {Item []} items 
+ * @param {number} index 
+ * @param {Item} newItem 
+ * @returns {Item []}
+ */
+export const replaceItemByIndex = (items: Item[], index: number, newItem: Item) => {
+    const newItems = [...items]
+    newItems.splice(index, 1, newItem)
+    return newItems
+}
+
+export const getIndex = (items: Item[], item: Item) => {
+    return items.findIndex(inner => inner.id === item.id)
 }
