@@ -3,7 +3,7 @@ import { Input } from "../Input/Input";
 import { dialogCloseSubject$ } from "../Dialog/Dialog";
 import { List } from "../List";
 import { AppStore } from "../../redux/store"
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useExpenses } from "../../hooks/useExpenses";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { expenseSchema } from "../../schemas/expense.schema";
@@ -14,6 +14,7 @@ import { Item, ItemCreated, ItemToModify } from "../../models";
 import { createExpense, editExpense } from "../../services";
 import { formatDate } from "../../utils";
 import "./index.css";
+import { changeMode } from "../../redux/states";
 
 export const Creator = () => {
 
@@ -21,7 +22,7 @@ export const Creator = () => {
     const stateExpenses = useSelector((store: AppStore) => store.expenses)
     const currentItem = stateExpenses.currentItem
     const isEditMode = stateExpenses.mode === 'edit'
-    
+    const dispatch = useDispatch()
     const { createItem, updateItem } = useExpenses(); 
 
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -53,6 +54,8 @@ export const Creator = () => {
             updateItem(item)
             // close dialog
             dialogCloseSubject$.setSubject = true;
+            // change mode to none
+            dispatch(changeMode('none'))
         },
         onError: () => alert('Error modifing item'),
     })

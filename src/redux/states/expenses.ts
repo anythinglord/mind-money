@@ -9,11 +9,11 @@ export interface ExpenseState {
     currentItem?: ItemToModify
 }
 
-type typeMode = 'create' | 'edit'
+type typeMode = 'create' | 'edit' | 'none'
 
 const initialState: ExpenseState = {
     items: [],
-    mode: 'create'
+    mode: 'none'
 }
 
 export const expensesSlice = createSlice({

@@ -1,3 +1,4 @@
+import { Categories } from "./data";
 import { Item } from "./models";
 
 export const isTrue = (expression: any) => {
@@ -70,4 +71,14 @@ export const replaceItemByIndex = (items: Item[], index: number, newItem: Item) 
 
 export const getIndex = (items: Item[], item: Item) => {
     return items.findIndex(inner => inner.id === item.id)
+}
+
+/**
+ * Get correct expense's categories according to the mode
+ * @param {string []} categories 
+ * @param {string } mode 
+ * @returns {string []}
+ */
+export const getCategoriesByMode = (categories: string[], mode: string) => {
+    return mode === 'none' ? categories : Categories.filter(category => category !== 'All categories')
 }

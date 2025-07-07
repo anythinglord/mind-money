@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { setCategory, setFilterCategory } from "../../redux/states/category"
 import { AppStore } from "../../redux/store"
 import "./index.css"
+import { getCategoriesByMode } from "../../utils"
 
 interface Props {
     value?: string
@@ -37,7 +38,7 @@ export const List = ({ value = Categories[0], isEditMode = false }: Props) => {
                 <i className={`fa-solid fa-chevron-${open ? 'up': 'down'}`}></i>
             </button>
             {open && <div className="list-collapse">
-                {Categories.map((name, index)=>(
+                {getCategoriesByMode(Categories, mode).map((name, index)=>(
                     <div className="list-item" key={index} onClick={() => handleChange(name)}>  
                         <i className={`fa-solid fa-check ${selected !== name ? 'color-white' : '' }`}/>
                         <span>{name}</span>

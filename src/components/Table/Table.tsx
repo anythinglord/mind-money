@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux"
 import { Item } from "../../models"
 import { IconButton } from "../IconButon"
 import "./index.css"
-import { changeMode, setCurrentItem } from "../../redux/states"
+import { changeMode, setCategory, setCurrentItem } from "../../redux/states"
 import { dialogOpenSubject$ } from '../Dialog'
 
 interface Props {
@@ -15,13 +15,13 @@ export const Table = ({ data }: Props) => {
     const dispatch = useDispatch()
 
     /**
-     * Change mode to edit expense
+     * Open dialog to edit expense
      * @returns void
      */
-    const handleChangeMode = (item: Item) => {
-        const { id, name, category, amount } = item
-        dispatch(setCurrentItem({ id, name, category, amount }))
+    const handleOpenDialog = (item: Item) => {
+        dispatch(setCurrentItem(item))
         dispatch(changeMode('edit'))
+        dispatch(setCategory(item.category))
         // open dialog to edit item
         dialogOpenSubject$.setSubject = true;    
     }
@@ -46,7 +46,7 @@ export const Table = ({ data }: Props) => {
                         <div className="tbl-column">{item.category}</div>
                         <div className="tbl-column">{item.amount}</div>
                         <div className="tbl-column-tiny">
-                            <IconButton size="nsx" type="pen" variant="outlined" handleClick={() => handleChangeMode(item)}/>
+                            <IconButton size="nsx" type="pen" variant="outlined" handleClick={() => handleOpenDialog(item)}/>
                             <IconButton size="nsx" type="trash" variant="outlined"/>
                         </div>
                     </div>
