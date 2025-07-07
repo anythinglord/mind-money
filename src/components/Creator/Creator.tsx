@@ -88,7 +88,7 @@ export const Creator = () => {
                             <Input label="amount" type="number" register={register} 
                                 value={ isEditMode ? currentItem?.amount : '' }
                                 error={isTrue(errors.amount)}  errorMessage={errors.amount?.message} />
-                            <List value={ isEditMode ? currentItem?.category : ''} isEditMode={isEditMode}/>
+                            <List />
                         </div>
                     </div>
                     <Button type="submit" label={isEditMode ? 'Save' : 'Create'} />

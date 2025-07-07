@@ -6,17 +6,12 @@ import { AppStore } from "../../redux/store"
 import "./index.css"
 import { getCategoriesByMode } from "../../utils"
 
-interface Props {
-    value?: string
-    isEditMode?: boolean
-}
-
-export const List = ({ value = Categories[0], isEditMode = false }: Props) => {
+export const List = () => {
     
     const stateCategory = useSelector((store: AppStore) => store.category)
     const stateExpenses = useSelector((store: AppStore) => store.expenses)
-    const mode = stateExpenses.mode
-    const initialValue = isEditMode ? value : stateCategory.name;
+    const isFilterMode = stateExpenses.mode === 'none'
+    const initialValue = isFilterMode ? stateCategory.filterName : stateCategory.name;
     const [selected, setSelected] = useState<string>(initialValue)
     const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
@@ -24,7 +19,7 @@ export const List = ({ value = Categories[0], isEditMode = false }: Props) => {
     const handleChange = (name: string) => {
         setOpen(prevState => !prevState)
         setSelected(name)
-        if (mode === 'none') {
+        if (isFilterMode) {
             dispatch(setFilterCategory(name))
         } else {
             dispatch(setCategory(name))
@@ -38,7 +33,7 @@ export const List = ({ value = Categories[0], isEditMode = false }: Props) => {
                 <i className={`fa-solid fa-chevron-${open ? 'up': 'down'}`}></i>
             </button>
             {open && <div className="list-collapse">
-                {getCategoriesByMode(Categories, mode).map((name, index)=>(
+                {getCategoriesByMode(Categories, isFilterMode).map((name, index) => (
                     <div className="list-item" key={index} onClick={() => handleChange(name)}>  
                         <i className={`fa-solid fa-check ${selected !== name ? 'color-white' : '' }`}/>
                         <span>{name}</span>

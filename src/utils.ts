@@ -76,9 +76,9 @@ export const getIndex = (items: Item[], item: Item) => {
 /**
  * Get correct expense's categories according to the mode
  * @param {string []} categories 
- * @param {string } mode 
+ * @param {boolean} isFilterMode 
  * @returns {string []}
  */
-export const getCategoriesByMode = (categories: string[], mode: string) => {
-    return mode === 'none' ? categories : Categories.filter(category => category !== 'All categories')
+export const getCategoriesByMode = (categories: string[], isFilterMode: boolean) => {
+    return isFilterMode ? categories : Categories.filter(category => category !== 'All categories')
 }
