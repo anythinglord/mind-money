@@ -10,11 +10,11 @@ import { filterItemsByCategory, filterItemsBySearchName, getIndex, replaceItemBy
 export const useExpenses = () => {
     
     const stateCategory = useSelector((store: AppStore) => store.category)
-    const categoryName = stateCategory.name;
+    const filterCategoryName = stateCategory.filterName
     const searchName = stateCategory.searchName
     const stateExpenses = useSelector((store: AppStore) => store.expenses)
     const expenseItems = stateExpenses.items
-
+    
     const [items, setItems] = useState<Item[]>(expenseItems)
     const dispatch = useDispatch()
     
@@ -52,27 +52,29 @@ export const useExpenses = () => {
 
     useEffect(()=>{
         if (searchName !== '') {
-            const itemsFilteredByCategory = filterItemsByCategory(expenseItems, categoryName)
+            const itemsFilteredByCategory = filterItemsByCategory(expenseItems, filterCategoryName)
             const itemsFilteredBySearchName = filterItemsBySearchName(itemsFilteredByCategory, searchName)
             setItems(itemsFilteredBySearchName)
         } else {
-            const filteredItems = filterItemsByCategory(expenseItems, categoryName)
+            const filteredItems = filterItemsByCategory(expenseItems, filterCategoryName)
             setItems(filteredItems)
         }
     },[searchName])
 
+
+    // used to filter all expense by category name
     useEffect(()=>{
-        if (categoryName === 'All categories') {
+        if (filterCategoryName === 'All categories') {
             const itemsFilteredBySearchName = filterItemsBySearchName(expenseItems, searchName)
             setItems(itemsFilteredBySearchName)
         } else {
-            if (categoryName) {
-                const itemsFilteredByCategory = filterItemsByCategory(expenseItems, categoryName)
+            if (filterCategoryName) {
+                const itemsFilteredByCategory = filterItemsByCategory(expenseItems, filterCategoryName)
                 const itemsFilteredBySearchName = filterItemsBySearchName(itemsFilteredByCategory, searchName)
                 setItems(itemsFilteredBySearchName)
             }
         }
-    },[categoryName])
+    },[filterCategoryName])
 
     return {
         expenses: items,

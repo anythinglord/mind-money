@@ -4,10 +4,12 @@ import { setLocalStorage, getLocalStorage } from "../../utilities"
 
 export interface CategoryState {
     name: string
+    filterName: string
     searchName: string
 }
 const initialState: CategoryState = {
     name: '',
+    filterName: '',
     searchName: ''
 }
 
@@ -25,6 +27,10 @@ export const categorySlice = createSlice({
             state.name = action.payload
             setLocalStorage(LocalStorageTypes.CATEGORY, { ...state, name: action.payload })
         },
+        setFilterCategory: ( state, action) => {
+            state.filterName = action.payload
+            setLocalStorage(LocalStorageTypes.CATEGORY, { ...state, filterName: action.payload })
+        },
         setSearchName: ( state, action) => {
             state.searchName = action.payload
             setLocalStorage(LocalStorageTypes.CATEGORY, { ...state, searchName: action.payload })
@@ -32,4 +38,4 @@ export const categorySlice = createSlice({
     }
 })
 
-export const { setCategory, setSearchName } = categorySlice.actions;
+export const { setCategory, setFilterCategory, setSearchName } = categorySlice.actions;

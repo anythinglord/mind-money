@@ -1,7 +1,7 @@
 import { Categories } from "../../data"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setCategory } from "../../redux/states/category"
+import { setCategory, setFilterCategory } from "../../redux/states/category"
 import { AppStore } from "../../redux/store"
 import "./index.css"
 
@@ -13,6 +13,8 @@ interface Props {
 export const List = ({ value = Categories[0], isEditMode = false }: Props) => {
     
     const stateCategory = useSelector((store: AppStore) => store.category)
+    const stateExpenses = useSelector((store: AppStore) => store.expenses)
+    const mode = stateExpenses.mode
     const initialValue = isEditMode ? value : stateCategory.name;
     const [selected, setSelected] = useState<string>(initialValue)
     const [open, setOpen] = useState(false)
@@ -21,7 +23,11 @@ export const List = ({ value = Categories[0], isEditMode = false }: Props) => {
     const handleChange = (name: string) => {
         setOpen(prevState => !prevState)
         setSelected(name)
-        dispatch(setCategory(name))
+        if (mode === 'none') {
+            dispatch(setFilterCategory(name))
+        } else {
+            dispatch(setCategory(name))
+        }
     }
 
     return(
