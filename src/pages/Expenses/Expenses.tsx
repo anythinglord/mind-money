@@ -4,18 +4,18 @@ import { NavBar } from "../../components/NavBar"
 import { Table } from "../../components/Table"
 import { Filter } from "../../components/Filter"
 import { CardList } from "../../components/CardList"
-import { ExpensesCardSections } from "../../data"
 import { useExpenses } from "../../hooks/useExpenses";
 import { useSelector } from "react-redux"
 import { AppStore } from "../../redux/store"
 import "./index.css"
 
+
 export const ExpensesPage = () => {
 
-    const { expenses } = useExpenses();
+    const { expenses, stats } = useExpenses();
     const stateExpenses = useSelector((store: AppStore) => store.expenses)
     const mode = stateExpenses.mode
-        
+    
     return(
         <div className="expenses-index">
             <NavBar/>
@@ -26,7 +26,7 @@ export const ExpensesPage = () => {
                 <div className="page-title">
                     Expenses Overview
                 </div>
-                <CardList data={ExpensesCardSections}/>
+                <CardList data={stats}/>
                 <Filter />
                 <Table data={expenses} />
             </div>

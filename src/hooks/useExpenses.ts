@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { AppStore } from "../redux/store"
 import { addExpense, setExpenses } from "../redux/states"
 import { useMutation } from "@tanstack/react-query"
-import { getExpenses } from "../services"
+import { getExpenses, getExpenseStats } from "../services"
 import { filterItemsByCategory, filterItemsBySearchName, getIndex, replaceItemByIndex } from "../utils"
+import { ExpensesStats } from "../data"
 
 export const useExpenses = () => {
     
@@ -16,6 +17,7 @@ export const useExpenses = () => {
     const expenseItems = stateExpenses.items
     
     const [items, setItems] = useState<Item[]>(expenseItems)
+    const [stats, setStats] = useState(ExpensesStats)
     const dispatch = useDispatch()
     
     const updateItem = (itemModified: Item) => {
@@ -46,8 +48,24 @@ export const useExpenses = () => {
         onError: () => console.log('error load expenses')
     })
 
+    const getExpensesStatsMutation = useMutation({
+        mutationFn: () => getExpenseStats(),
+        onSuccess: (response) => {
+            const { highestCategory, total, totalCurrentMonth } = response
+            setStats(prevStats => {
+                const newStats = [...prevStats]
+                newStats[0]['value'] = total
+                newStats[1]['value'] = highestCategory
+                newStats[2]['value'] = totalCurrentMonth
+                return newStats
+            })
+        },
+        onError: () => console.log('error load expenses')
+    })
+
     useEffect(() => {
         getExpensesMutation.mutate()
+        getExpensesStatsMutation.mutate()
     },[])
 
     useEffect(()=>{
@@ -78,6 +96,7 @@ export const useExpenses = () => {
 
     return {
         expenses: items,
+        stats: stats, 
         createItem: createNewItem,
         updateItem: updateItem
     }

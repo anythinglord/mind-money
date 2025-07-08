@@ -45,3 +45,16 @@ export const editExpense = async (data: ItemToModify) => {
     }
     return response?.data;
 }
+
+export const getExpenseStats = async () => {
+    
+    const request = axios.get(`${url}/expenses/stats/${activeWorkSpace}` , {
+        withCredentials: true
+    });
+    const [response, error] = await catchError(request)
+    if (error) {
+        console.error("Error getting expenses:", error);
+        throw new Error("Error getting expense");
+    }
+    return response?.data;
+}
