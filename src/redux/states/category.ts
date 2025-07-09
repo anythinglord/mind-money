@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Item } from "../../models";
 import { LocalStorageTypes } from "../../models";
 import { setLocalStorage, getLocalStorage } from "../../utilities"
 
 export interface CategoryState {
     name: string
-    items: Item[]
+    filterName: string
+    searchName: string
 }
 const initialState: CategoryState = {
     name: '',
-    items: []
+    filterName: '',
+    searchName: ''
 }
 
 const initialStateTest = () => {
@@ -25,8 +26,16 @@ export const categorySlice = createSlice({
         setCategory: ( state, action) => {
             state.name = action.payload
             setLocalStorage(LocalStorageTypes.CATEGORY, { ...state, name: action.payload })
-        } 
+        },
+        setFilterCategory: ( state, action) => {
+            state.filterName = action.payload
+            setLocalStorage(LocalStorageTypes.CATEGORY, { ...state, filterName: action.payload })
+        },
+        setSearchName: ( state, action) => {
+            state.searchName = action.payload
+            setLocalStorage(LocalStorageTypes.CATEGORY, { ...state, searchName: action.payload })
+        }
     }
 })
 
-export const { setCategory } = categorySlice.actions;
+export const { setCategory, setFilterCategory, setSearchName } = categorySlice.actions;

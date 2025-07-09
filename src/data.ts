@@ -11,7 +11,7 @@ export const Categories: string[] = [
     'All categories', 'Food', 'Utilities', 'Transportation', 'Entertainment'
 ]
 
-export const ExpensesCardSections: Section[] = [
+export const ExpensesStats: Section[] = [
     { name: 'Total Expenses', icon: 'dollar-sign', value: 5000 },
     { name: 'Highest Category', icon: 'pie-chart', value: 'Food' },
     { name: 'This Month', icon: 'signal', value: 5000 },

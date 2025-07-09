@@ -6,6 +6,7 @@ import { capitalize } from "../../utils";
 type inputType = 'password' | 'text' | 'number'
 
 interface Props {
+    value?: string | undefined
     type?: inputType
     label?: string
     //inputRef?: RefObject<HTMLInputElement>;
@@ -16,8 +17,9 @@ interface Props {
 
 /* The passwords don't match. Please try again. */
 
-export const Input = ({ type = 'text', label = '', error = false, errorMessage, register }: Props) => {
-
+export const Input = ({ value = '', type = 'text', label = '', error = false, errorMessage, register }: Props) => {
+    
+    const isValueNone = value === ''
     const [active, setActive] = useState<boolean>(false);
     const changeState = () => {
         setActive(prevState => prevState ? false : true)
@@ -26,9 +28,9 @@ export const Input = ({ type = 'text', label = '', error = false, errorMessage, 
     return(
         <div className="input-root">
             <div className={`input-index ${error ? 'has-error' : ''}`}>
-                <input 
-                    type={ active ? "text" : type } className='input' 
-                    placeholder={capitalize(label)} {...register(label)} 
+                <input
+                    type={ active ? "text" : type } className='input'
+                    placeholder={isValueNone ? capitalize(label) : value} {...register(label)} 
                 />
                 {type === 'password' && <i className={`fa-solid fa-eye${active ? '-slash' : ''}`} onClick={changeState}/>}
             </div>

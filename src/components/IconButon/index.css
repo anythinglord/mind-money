@@ -1,7 +1,7 @@
 .ib-index {
     cursor: pointer;
     background-color: transparent;
-    border: 2px solid var(--main-bg-green);
+    border: 1px solid var(--main-bg-green);
     color: var(--main-bg-green);
     height: 42px;
     display: flex;
@@ -13,6 +13,13 @@
         background-color: var(--main-bg-green);
         color: #fff;
     }
+}
+
+.ib-nsx {
+    border-radius: 18px;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
 }
 
 .ib-sx {
@@ -35,7 +42,6 @@
     color: #fff;
     &:hover{
         background-color: var(--main-bg-greeno);
-        border: 2px solid var(--main-bg-greeno);
         color: #fff;
     }
 }
