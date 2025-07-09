@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react"
 import { IconButton } from "../IconButon"
 import { Subscription } from "rxjs"
 import "./index.css"
+import { useDispatch } from "react-redux"
+import { changeMode } from "../../redux/states"
 interface Props {
     children: React.ReactNode
     title: string
@@ -14,6 +16,7 @@ export const dialogCloseSubject$ = new SubjectManager<boolean>();
 export const Dialog = ({ children, title }: Props) => {
 
     const [open, setOpen] = useState<boolean>(false)
+    const dispatch = useDispatch();
     
     let openSubject$ = new Subscription();
     let closeSubject$ = new Subscription();
@@ -34,6 +37,8 @@ export const Dialog = ({ children, title }: Props) => {
 
     const handleClose = () => {
         setOpen(false);
+        // after complete any action like edit/create any item its imperative to change mode to none
+        dispatch(changeMode('none'))
     }
 
     return (

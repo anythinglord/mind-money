@@ -1,9 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { Item } from "../models";
-import { categorySlice, CategoryState, expensesSlice, userSlice, UserState } from "./states";
+import { categorySlice, CategoryState, ExpenseState, expensesSlice, userSlice, UserState } from "./states";
 
 export interface AppStore {
-    expenses: Item[]
+    expenses: ExpenseState
     category: CategoryState
     user: UserState    
 }

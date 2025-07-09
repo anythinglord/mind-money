@@ -1,22 +1,36 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Item, ItemCreated, Type } from '../models'
 import { useDispatch, useSelector } from "react-redux"
 import { AppStore } from "../redux/store"
-import { addExpense } from "../redux/states"
+import { addExpense, setExpenses } from "../redux/states"
+import { useMutation } from "@tanstack/react-query"
+import { getExpenses, getExpenseStats } from "../services"
+import { filterItemsByCategory, filterItemsBySearchName, getIndex, replaceItemByIndex } from "../utils"
+import { ExpensesStats } from "../data"
 
 export const useExpenses = () => {
     
     const stateCategory = useSelector((store: AppStore) => store.category)
-    const categoryName = stateCategory.name;
+    const filterCategoryName = stateCategory.filterName
+    const searchName = stateCategory.searchName
     const stateExpenses = useSelector((store: AppStore) => store.expenses)
-    // const [items, setItems] = useState<Item[]>(stateExpenses)
+    const expenseItems = stateExpenses.items
+    
+    const [items, setItems] = useState<Item[]>(expenseItems)
+    const [stats, setStats] = useState(ExpensesStats)
     const dispatch = useDispatch()
     
+    const updateItem = (itemModified: Item) => {
+        const index = getIndex(expenseItems, itemModified)
+        const expensesUpdated = replaceItemByIndex(expenseItems, index, itemModified)
+        dispatch(setExpenses(expensesUpdated))
+        setItems(expensesUpdated)
+    }
+
     const createNewItem = (data: ItemCreated) => {
-        const { name, amount, category } = data;
-        console.log('creating new item :', data)
+        const { name, amount, category, createdAt } = data;
         const newItem: Item = { 
-            date: '2025-02-13',
+            createdAt: createdAt,
             name: name,
             category: category,
             type:  Type.Expenses,
@@ -24,19 +38,66 @@ export const useExpenses = () => {
         }
         dispatch(addExpense(newItem))
     }
+    
+    const getExpensesMutation = useMutation({
+        mutationFn: () => getExpenses(),
+        onSuccess: (response) => {
+            const { expenses } = response
+            dispatch(setExpenses(expenses))
+        },
+        onError: () => console.log('error load expenses')
+    })
+
+    const getExpensesStatsMutation = useMutation({
+        mutationFn: () => getExpenseStats(),
+        onSuccess: (response) => {
+            const { highestCategory, total, totalCurrentMonth } = response
+            setStats(prevStats => {
+                const newStats = [...prevStats]
+                newStats[0]['value'] = total
+                newStats[1]['value'] = highestCategory
+                newStats[2]['value'] = totalCurrentMonth
+                return newStats
+            })
+        },
+        onError: () => console.log('error load expenses')
+    })
+
+    useEffect(() => {
+        getExpensesMutation.mutate()
+        getExpensesStatsMutation.mutate()
+    },[])
 
     useEffect(()=>{
-        if (categoryName === 'All categories') {
-            //setItems(stateExpenses)
+        if (searchName !== '') {
+            const itemsFilteredByCategory = filterItemsByCategory(expenseItems, filterCategoryName)
+            const itemsFilteredBySearchName = filterItemsBySearchName(itemsFilteredByCategory, searchName)
+            setItems(itemsFilteredBySearchName)
         } else {
-            // const filteredItems = [...stateExpenses].filter((item) => item.category === categoryName)
-            //setItems(filteredItems)
-            // dispatch(setExpenses(filteredItems))
+            const filteredItems = filterItemsByCategory(expenseItems, filterCategoryName)
+            setItems(filteredItems)
         }
-    },[categoryName])
+    },[searchName])
+
+
+    // used to filter all expense by category name
+    useEffect(()=>{
+        if (filterCategoryName === 'All categories') {
+            const itemsFilteredBySearchName = filterItemsBySearchName(expenseItems, searchName)
+            setItems(itemsFilteredBySearchName)
+        } else {
+            if (filterCategoryName) {
+                const itemsFilteredByCategory = filterItemsByCategory(expenseItems, filterCategoryName)
+                const itemsFilteredBySearchName = filterItemsBySearchName(itemsFilteredByCategory, searchName)
+                setItems(itemsFilteredBySearchName)
+            }
+        }
+    },[filterCategoryName])
 
     return {
-        expenses: stateExpenses,
-        createItem: createNewItem
+        expenses: items,
+        stats: stats, 
+        createItem: createNewItem,
+        updateItem: updateItem
     }
 }

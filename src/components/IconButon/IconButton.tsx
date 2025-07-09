@@ -2,7 +2,7 @@ import "./index.css"
 
 interface Props {
     type?: string
-    size?: 'sx' | 'mx' | 'lx'
+    size?: 'nsx' | 'sx' | 'mx' | 'lx'
     variant?: 'contained' | 'outlined'
     handleClick?: () => void
 }
