@@ -1,51 +1,65 @@
-# React + TypeScript + Vite
+# Personal Finance Tracker 💰
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal finance app to track expenses and manage budgets — built with a modern and powerful tech stack.
 
-Currently, two official plugins are available:
+## ✨ Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 📊 Track your expenses in real-time
+- 💡 Create and manage budgets easily
+- 🔥 Fast and reactive UI built with React + Vite
+- 💾 Persist and fetch data using TanStack Query and Axios
+- ✅ Type-safe forms with React Hook Form and Zod
+- ⚡ Predictable state management with Redux and RxJS
+- 🧪 Comprehensive testing using Vitest and Testing Library
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **React** — Frontend library for building interactive UIs
+- **Vite** — Lightning-fast development build tool
+- **TypeScript** — Type-safe JavaScript for better maintainability
+- **Redux** — Global state management
+- **RxJS** — Reactive programming for managing complex async flows
+- **TanStack Query** — Server state synchronization and caching
+- **Axios** — Promise-based HTTP client
+- **Zod** — Type-safe schema validation
+- **React Hook Form** — Flexible form management
+- **Vitest** — Unit and integration testing
+- **Testing Library** — UI testing focused on user interactions
 
-- Configure the top-level `parserOptions` property like this:
+## 🚀 Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Prerequisites
+
+- Node.js >= 18
+- pnpm or npm
+
+### Install dependencies
+
+```bash
+pnpm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### Run the development server
+```bash
+pnpm run dev
 ```
-# repo
+
+### Run tests
+```bash
+pnpm run test
+```
+
+## 🚀 Project Structure
+```bash
+src/
+├─ components/      → Reusable UI components
+├─ hooks/           → Custom hooks
+├─ models/          → Interfaces
+├─ pages/           → Pages
+├─ redux/           → Redux store and slices
+├─ schemas/         → Zod schemas
+├─ services/        → API calls (Axios, TanStack Query)
+├─ utilities/       → General functions
+├─ App.tsx          → Main app component
+└─ main.tsx         → Entry point
+```
