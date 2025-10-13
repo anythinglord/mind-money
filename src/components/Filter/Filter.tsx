@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Button } from '../Button'
 import { dialogOpenSubject$ } from '../Dialog'
-import { List } from '../List'
+import { ContainerCategoriesList } from '../List'
 import { changeMode, setSearchName } from '../../redux/states'
 import { AppStore } from '../../redux/store'
 import './index.css'
@@ -25,7 +25,7 @@ export const Filter = () => {
     return (
         <div className="filter-index">
             <div className='filter-items'>
-                <List />
+                <ContainerCategoriesList />
                 <Button label='Add Expense' handleClick={handleClick} />
             </div>
             <div className='filter-items filter-search'>

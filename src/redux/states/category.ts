@@ -8,8 +8,8 @@ export interface CategoryState {
     searchName: string
 }
 const initialState: CategoryState = {
-    name: '',
-    filterName: '',
+    name: 'Food',
+    filterName: 'All categories',
     searchName: ''
 }
 

@@ -1,4 +1,4 @@
-import { Type } from './interfaces';
+import { Type, recurrence } from './interfaces';
 
 export interface Item {
     id?: string
@@ -6,6 +6,7 @@ export interface Item {
     name: string
     category: string 
     type: Type
+    recurrence?: recurrence
     amount: string
     updatedAt?: string
     workSpaceId?: string 

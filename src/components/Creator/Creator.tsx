@@ -1,7 +1,6 @@
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
 import { dialogCloseSubject$ } from "../Dialog/Dialog";
-import { List } from "../List";
 import { AppStore } from "../../redux/store"
 import { useDispatch, useSelector } from "react-redux";
 import { useExpenses } from "../../hooks/useExpenses";
@@ -15,6 +14,7 @@ import { createExpense, editExpense } from "../../services";
 import { formatDate } from "../../utils";
 import "./index.css";
 import { changeMode } from "../../redux/states";
+import { ContainerCategoriesList } from "../List/ContainerCategoriesList";
 
 export const Creator = () => {
 
@@ -88,7 +88,8 @@ export const Creator = () => {
                             <Input label="amount" type="number" register={register} 
                                 value={ isEditMode ? currentItem?.amount : '' }
                                 error={isTrue(errors.amount)}  errorMessage={errors.amount?.message} />
-                            <List />
+                            <ContainerCategoriesList />
+                            <ContainerCategoriesList />
                         </div>
                     </div>
                     <Button type="submit" label={isEditMode ? 'Save' : 'Create'} />

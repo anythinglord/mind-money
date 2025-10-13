@@ -11,3 +11,4 @@ export interface Section  {
 }
 
 export type LoginMode = 'login'| 'signup' | 'forgot'
+export type recurrence = 'one-time' | 'monthly' | 'annual'
