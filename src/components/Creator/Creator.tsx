@@ -14,7 +14,7 @@ import { createExpense, editExpense } from "../../services";
 import { formatDate } from "../../utils";
 import "./index.css";
 import { changeMode } from "../../redux/states";
-import { ContainerCategoriesList } from "../List/ContainerCategoriesList";
+import { ContainerCategoriesList, ContainerRecurrenciesList } from "../List";
 
 export const Creator = () => {
 
@@ -88,7 +88,7 @@ export const Creator = () => {
                             <Input label="amount" type="number" register={register} 
                                 value={ isEditMode ? currentItem?.amount : '' }
                                 error={isTrue(errors.amount)}  errorMessage={errors.amount?.message} />
-                            <ContainerCategoriesList />
+                            <ContainerRecurrenciesList />
                             <ContainerCategoriesList />
                         </div>
                     </div>

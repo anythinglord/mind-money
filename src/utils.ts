@@ -1,5 +1,5 @@
 import { Categories } from "./data";
-import { Item } from "./models";
+import { Item, Recurrence } from "./models";
 
 export const isTrue = (expression: any) => {
     return expression ? true : false
@@ -79,6 +79,10 @@ export const getIndex = (items: Item[], item: Item) => {
  * @param {boolean} isFilterMode 
  * @returns {string []}
  */
-export const getCategoriesByMode = (categories: string[], isFilterMode: boolean) => {
-    return isFilterMode ? categories : Categories.filter(category => category !== 'All categories')
+export const getCategoriesByMode = (isFilterMode: boolean) => {
+    return isFilterMode ? Categories : Categories.filter(category => category !== 'All categories')
+}
+
+export const getRecurrences = () => {
+    return Object.values(Recurrence)
 }

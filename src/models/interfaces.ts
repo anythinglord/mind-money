@@ -4,6 +4,12 @@ export enum Type {
     Expenses= 'Expenses',
     Saving= 'Saving'
 }
+
+export enum Recurrence {
+    ONE = 'One time',
+    MONTLY ='Montly',
+    ANNUALY ='Annualy'
+}
 export interface Section  {
     name: string
     icon: string
@@ -11,4 +17,3 @@ export interface Section  {
 }
 
 export type LoginMode = 'login'| 'signup' | 'forgot'
-export type recurrence = 'one-time' | 'monthly' | 'annual'

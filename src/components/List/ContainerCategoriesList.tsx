@@ -3,7 +3,6 @@ import { setCategory, setFilterCategory } from "../../redux/states/category"
 import { AppStore } from "../../redux/store"
 import { List } from "./List"
 import { getCategoriesByMode } from "../../utils"
-import { Categories } from "../../data"
 
 export const ContainerCategoriesList = () => {
     
@@ -23,7 +22,7 @@ export const ContainerCategoriesList = () => {
     
     return(
         <List
-            items={getCategoriesByMode(Categories, isFilterMode)}
+            items={getCategoriesByMode(isFilterMode)}
             initialValue={initialValue} 
             onItemSelected={handleChange}/>
     )
