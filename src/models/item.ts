@@ -9,9 +9,10 @@ export interface Item {
     recurrence?: Recurrence
     amount: string
     updatedAt?: string
+    validAt?: string
     workSpaceId?: string 
 }
 
-export type ItemCreated = Pick<Item, 'name' | 'amount' | 'category' | 'createdAt'>
+export type ItemCreated = Pick<Item, 'name' | 'amount' | 'category' | 'createdAt'| 'validAt' | 'recurrence'>
 export type ItemToModify = Pick<Item, 'id'| 'category' > & Partial<Pick<Item, 'name' | 'amount'>>
 export type ItemCreatedWithoutCategory = Pick<Item, 'name' | 'amount' >

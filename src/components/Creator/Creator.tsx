@@ -12,14 +12,15 @@ import { useMutation } from "@tanstack/react-query";
 import { Item, ItemCreated, ItemToModify } from "../../models";
 import { createExpense, editExpense } from "../../services";
 import { formatDate } from "../../utils";
-import "./index.css";
-import { changeMode } from "../../redux/states";
+import { changeMode, setValitAt } from "../../redux/states";
 import { ContainerCategoriesList, ContainerRecurrenciesList } from "../List";
+import "./index.css";
 
 export const Creator = () => {
 
     const stateCategory = useSelector((store: AppStore) => store.category)
     const stateExpenses = useSelector((store: AppStore) => store.expenses)
+    const stateRecurrence = useSelector((store: AppStore) => store.recurrence)
     const currentItem = stateExpenses.currentItem
     const isEditMode = stateExpenses.mode === 'edit'
     const dispatch = useDispatch()
@@ -39,8 +40,8 @@ export const Creator = () => {
                 })
             } else {
                 createNewExpense.mutate({ 
-                    name: data.name, amount: data.amount,
-                    category: stateCategory.name
+                    name: data.name, amount: data.amount, recurrence: stateRecurrence.name,
+                    validAt: stateRecurrence.validAt, category: stateCategory.name
                 })    
             }
         } catch (error) {
@@ -61,9 +62,7 @@ export const Creator = () => {
     })
 
     const createNewExpense = useMutation({
-        mutationFn: (expense: ItemCreated) => createExpense(
-            expense.name, expense.amount, expense.category
-        ),
+        mutationFn: (expense: ItemCreated) => createExpense(expense),
         onSuccess: (data: ItemCreated) => {
             createItem({
                 name: data.name,
@@ -82,8 +81,11 @@ export const Creator = () => {
             <div className="creator-index">
                 <div className="creator-content">
                     <div className="group">
-                        <Input label="name" register={register} value={ isEditMode ? currentItem?.name : '' }
-                            error={isTrue(errors.name)}  errorMessage={errors.name?.message} />
+                        <div className="row">
+                            <Input label="name" register={register} value={ isEditMode ? currentItem?.name : '' }
+                                error={isTrue(errors.name)}  errorMessage={errors.name?.message} />
+                            <input type="date" className="input-date" onChange={(e) => dispatch(setValitAt(e.target.value))}/>
+                        </div>
                         <div className="row">
                             <Input label="amount" type="number" register={register} 
                                 value={ isEditMode ? currentItem?.amount : '' }

@@ -1,6 +1,6 @@
 import { catchError } from '../utils';
 import { config } from '../config'
-import { ItemToModify } from '../models';
+import { ItemToModify, ItemCreated } from '../models';
 import axios from 'axios';
 
 const url = config.API_URL
@@ -19,11 +19,14 @@ export const getExpenses = async () => {
     return response?.data;
 }
 
-export const createExpense = async (name: string, amount: string, category: string) => {
+export const createExpense = async (data: ItemCreated) => {
     
     try {
         const response = await axios.post(`${url}/expenses`,
-            { name, amount, category },
+            { 
+                named: data.name, amount: data.amount, category: data.category, 
+                recurrence: data.recurrence, validAt: data.validAt 
+            },
             { withCredentials: true }
         )
         return response.data;

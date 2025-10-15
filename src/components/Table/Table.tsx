@@ -11,7 +11,7 @@ interface Props {
 
 export const Table = ({ data }: Props) => {
 
-    const columns: string[] = ['Date', 'Description', 'Category', 'Amount', '']
+    const columns: string[] = ['ID', 'Name','CreatedAt', 'ValidAt' , 'Recurrence','Category', 'Amount', 'Actions']
     const dispatch = useDispatch()
 
     /**
@@ -31,7 +31,7 @@ export const Table = ({ data }: Props) => {
             <div className="table-header flex-sp-cen">
                 {columns.map((column, index) => (
                     <div className={
-                        ` ${index === 4 ? 'tbl-column-tiny' : 'tbl-column'} 
+                        ` ${index === 7 ? 'tbl-column-tiny' : 'tbl-column'} 
                         ${index === 0 ? 'col-left' : ''}` } 
                         key={index}>
                         {column}
@@ -41,8 +41,11 @@ export const Table = ({ data }: Props) => {
             <div className="table-content">
                 {data.map((item, index) => (
                     <div className="table-row flex-sp-cen" key={index}>
-                        <div className="tbl-column col-left">{item.createdAt?.slice(0,10)}</div>
+                        <div className="tbl-column col-left">{index + 1}</div>
                         <div className="tbl-column">{item.name}</div>
+                        <div className="tbl-column">{item.createdAt?.slice(0,10)}</div>
+                        <div className="tbl-column">{item.validAt?.slice(0,10)}</div>
+                        <div className="tbl-column">{item.recurrence}</div>
                         <div className="tbl-column">{item.category}</div>
                         <div className="tbl-column">{item.amount}</div>
                         <div className="tbl-column-tiny">

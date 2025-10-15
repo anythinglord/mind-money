@@ -7,8 +7,8 @@ export enum Type {
 
 export enum Recurrence {
     ONE = 'One time',
-    MONTLY ='Montly',
-    ANNUALY ='Annualy'
+    MONTLY ='Monthly',
+    ANNUALY ='Annually'
 }
 export interface Section  {
     name: string

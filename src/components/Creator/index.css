@@ -26,3 +26,10 @@
     justify-content: space-between;
     flex-direction: column;
 }
+
+.input-date {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 8px;
+    height: 24px;
+}

@@ -1,6 +1,7 @@
 .table-index {
     background-color: var(--main-bg-yellow);
-    height: 475px;
+    /*height: 475px;*/
+    height: 525px;
     border-radius: 5px;
     border: 1px solid #ddd;
     margin: 0 20px 0 20px;
@@ -48,15 +49,15 @@
 }
 
 .tbl-column-tiny {
-    width: 8%;
+    width: 15%;
     padding-right: 15px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     gap: 15px;
     height: 17px;
-    
 }
+
 .mr-15 {
     margin-right: 15px;
 }
