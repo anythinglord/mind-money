@@ -24,7 +24,7 @@ export const createExpense = async (data: ItemCreated) => {
     try {
         const response = await axios.post(`${url}/expenses`,
             { 
-                named: data.name, amount: data.amount, category: data.category, 
+                name: data.name, amount: data.amount, category: data.category, 
                 recurrence: data.recurrence, validAt: data.validAt 
             },
             { withCredentials: true }

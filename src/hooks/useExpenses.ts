@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import { Item, ItemCreated, Type } from '../models'
 import { useDispatch, useSelector } from "react-redux"
+import { useAppDispatch } from "./useDispatch"
 import { AppStore } from "../redux/store"
-import { addExpense, setExpenses } from "../redux/states"
+import { saveExpense, setExpenses } from "../redux/states"
 import { useMutation } from "@tanstack/react-query"
 import { getExpenses, getExpenseStats } from "../services"
 import { filterItemsByCategory, filterItemsBySearchName, getIndex, replaceItemByIndex } from "../utils"
@@ -19,6 +20,7 @@ export const useExpenses = () => {
     const [items, setItems] = useState<Item[]>(expenseItems)
     const [stats, setStats] = useState(ExpensesStats)
     const dispatch = useDispatch()
+    const dispatchAsync = useAppDispatch()
     
     const updateItem = (itemModified: Item) => {
         const index = getIndex(expenseItems, itemModified)
@@ -36,7 +38,7 @@ export const useExpenses = () => {
             type:  Type.Expenses,
             amount: amount 
         }
-        dispatch(addExpense(newItem))
+        dispatchAsync(saveExpense({ item: newItem, currentItems: expenseItems }))
     }
     
     const getExpensesMutation = useMutation({

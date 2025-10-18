@@ -8,7 +8,7 @@ export const HomeCardSections: Section[] = [
 ]
 
 export const Categories: string[] = [
-    'All categories', 'Food', 'Utilities', 'Transportation', 'Entertainment'
+    'All categories', 'Food', 'Credit', 'Services', 'Health', 'General', 'Returns'
 ]
 
 export const ExpensesStats: Section[] = [

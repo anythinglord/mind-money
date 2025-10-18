@@ -9,7 +9,7 @@ export interface AppStore {
     user: UserState    
 }
 
-export default configureStore<AppStore>({
+export const store = configureStore<AppStore>({
     reducer: {
         expenses: expensesSlice.reducer,
         category: categorySlice.reducer,
@@ -17,3 +17,7 @@ export default configureStore<AppStore>({
         recurrence: recurrenceSlice.reducer
     }
 })
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export default store;
