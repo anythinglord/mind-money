@@ -2,7 +2,6 @@ import { Type, Recurrence } from './interfaces';
 
 export interface Item {
     id?: string
-    createdAt?: string
     name: string
     category: string 
     type: Type
@@ -10,6 +9,7 @@ export interface Item {
     amount: string
     updatedAt?: string
     validAt?: string
+    createdAt?: string
     workSpaceId?: string 
 }
 

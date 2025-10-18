@@ -11,7 +11,6 @@ import { isTrue } from "../../utils";
 import { useMutation } from "@tanstack/react-query";
 import { Item, ItemCreated, ItemToModify } from "../../models";
 import { createExpense, editExpense } from "../../services";
-import { formatDate } from "../../utils";
 import { changeMode, setValitAt } from "../../redux/states";
 import { ContainerCategoriesList, ContainerRecurrenciesList } from "../List";
 import "./index.css";
@@ -24,7 +23,7 @@ export const Creator = () => {
     const currentItem = stateExpenses.currentItem
     const isEditMode = stateExpenses.mode === 'edit'
     const dispatch = useDispatch()
-    const { createItem, updateItem } = useExpenses(); 
+    const { createLocalExpense, updateItem } = useExpenses(); 
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(expenseSchema(isEditMode)),
@@ -63,13 +62,8 @@ export const Creator = () => {
 
     const createNewExpense = useMutation({
         mutationFn: (expense: ItemCreated) => createExpense(expense),
-        onSuccess: (data: ItemCreated) => {
-            createItem({
-                name: data.name,
-                amount: String(data.amount),
-                category: data.category,
-                createdAt: formatDate(data.createdAt)
-            })
+        onSuccess: (item: ItemCreated) => {
+            createLocalExpense(item)
             // close dialog
             dialogCloseSubject$.setSubject = true;
         },

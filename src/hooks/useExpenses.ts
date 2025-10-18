@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Item, ItemCreated, Type } from '../models'
+import { Item, ItemCreated } from '../models'
 import { useDispatch, useSelector } from "react-redux"
 import { useAppDispatch } from "./useDispatch"
 import { AppStore } from "../redux/store"
@@ -8,9 +8,10 @@ import { useMutation } from "@tanstack/react-query"
 import { getExpenses, getExpenseStats } from "../services"
 import { filterItemsByCategory, filterItemsBySearchName, getIndex, replaceItemByIndex } from "../utils"
 import { ExpensesStats } from "../data"
+import { adaptExpense } from "../services/adapters/expenseAdapter"
 
 export const useExpenses = () => {
-    
+
     const stateCategory = useSelector((store: AppStore) => store.category)
     const filterCategoryName = stateCategory.filterName
     const searchName = stateCategory.searchName
@@ -21,7 +22,12 @@ export const useExpenses = () => {
     const [stats, setStats] = useState(ExpensesStats)
     const dispatch = useDispatch()
     const dispatchAsync = useAppDispatch()
-    
+
+    useEffect(() => {
+        // update table expenses after update the store
+        setItems(expenseItems)
+    }, [expenseItems])
+
     const updateItem = (itemModified: Item) => {
         const index = getIndex(expenseItems, itemModified)
         const expensesUpdated = replaceItemByIndex(expenseItems, index, itemModified)
@@ -29,18 +35,11 @@ export const useExpenses = () => {
         setItems(expensesUpdated)
     }
 
-    const createNewItem = (data: ItemCreated) => {
-        const { name, amount, category, createdAt } = data;
-        const newItem: Item = { 
-            createdAt: createdAt,
-            name: name,
-            category: category,
-            type:  Type.Expenses,
-            amount: amount 
-        }
+    const createLocalExpense = (data: ItemCreated) => {
+        const newItem = adaptExpense(data)
         dispatchAsync(saveExpense({ item: newItem, currentItems: expenseItems }))
     }
-    
+
     const getExpensesMutation = useMutation({
         mutationFn: () => getExpenses(),
         onSuccess: (response) => {
@@ -68,9 +67,9 @@ export const useExpenses = () => {
     useEffect(() => {
         getExpensesMutation.mutate()
         getExpensesStatsMutation.mutate()
-    },[])
+    }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         if (searchName !== '') {
             const itemsFilteredByCategory = filterItemsByCategory(expenseItems, filterCategoryName)
             const itemsFilteredBySearchName = filterItemsBySearchName(itemsFilteredByCategory, searchName)
@@ -79,11 +78,11 @@ export const useExpenses = () => {
             const filteredItems = filterItemsByCategory(expenseItems, filterCategoryName)
             setItems(filteredItems)
         }
-    },[searchName])
+    }, [searchName])
 
 
     // used to filter all expense by category name
-    useEffect(()=>{
+    useEffect(() => {
         if (filterCategoryName === 'All categories') {
             const itemsFilteredBySearchName = filterItemsBySearchName(expenseItems, searchName)
             setItems(itemsFilteredBySearchName)
@@ -94,12 +93,12 @@ export const useExpenses = () => {
                 setItems(itemsFilteredBySearchName)
             }
         }
-    },[filterCategoryName])
+    }, [filterCategoryName])
 
     return {
         expenses: items,
-        stats: stats, 
-        createItem: createNewItem,
+        stats: stats,
+        createLocalExpense: createLocalExpense,
         updateItem: updateItem
     }
 }
