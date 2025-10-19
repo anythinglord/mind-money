@@ -1,32 +1,54 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Item, ItemToModify } from "../../models";
+import { Item, ItemToModify, Section } from "../../models";
 import { LocalStorageTypes } from "../../models";
 import { setLocalStorage, getLocalStorage } from "../../utilities"
-
+import { mockExpenseStats } from '../../data'
+import { Stats } from "../../models/api/CreateExpenseResponse";
+import { updateExpenseStats } from "../../utils";
 export interface ExpenseState {
     items: Item[]
     mode: typeMode
     currentItem?: ItemToModify
+    stats: Section[]
 }
 
 type typeMode = 'create' | 'edit' | 'none'
 
 const initialState: ExpenseState = {
     items: [],
-    mode: 'none'
+    mode: 'none',
+    stats: mockExpenseStats
 }
 
-export const saveExpense = createAsyncThunk(
-    'expenses/saveExpense',
-    async ({ item, currentItems }: { item: Item, currentItems: Item[] }, thunkAPI) => {
-        const newItems = [...currentItems, item]
+export const updateStats = createAsyncThunk(
+    'expenses/updateStats',
+    async ({ stats }: { stats: Stats }, _) => {
+        const newStats = updateExpenseStats(mockExpenseStats, stats)
         try {
             const currentState = JSON.parse(getLocalStorage(LocalStorageTypes.EXPENSES) as string)
-            setLocalStorage(LocalStorageTypes.EXPENSES, {...currentState, items: newItems })
+            setLocalStorage(LocalStorageTypes.EXPENSES, {...currentState, stats: newStats })
         } catch (error) {
             console.error("Error saving new item", error);
         }
-        return newItems
+        return newStats
+    }
+)
+
+export const saveExpense = createAsyncThunk(
+    'expenses/saveExpense',
+    async ({ item, currentItems, stats }: { item: Item, currentItems: Item[], stats: Stats }, _) => {
+        const newItems = [...currentItems, item]
+        const newStats = updateExpenseStats(mockExpenseStats, stats)
+        try {
+            const currentState = JSON.parse(getLocalStorage(LocalStorageTypes.EXPENSES) as string)
+            setLocalStorage(LocalStorageTypes.EXPENSES, {...currentState, items: newItems, stats: newStats })
+        } catch (error) {
+            console.error("Error saving new item", error);
+        }
+        return {
+            newItems: newItems,
+            newStats: newStats
+        }
     }
 )
 
@@ -54,9 +76,13 @@ export const expensesSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(saveExpense.fulfilled, (state, action) => {
-            state.items = action.payload; 
-            state.status = 'succeeded';
-          })
+                console.log("fullfilled ->", action.payload)
+                state.items = action.payload.newItems;
+                state.stats = action.payload.newStats 
+            })
+            .addCase(updateStats.fulfilled, (state, action) => {
+                state.stats = action.payload; 
+            })     
       },
 })
 

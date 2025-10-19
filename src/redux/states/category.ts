@@ -7,6 +7,7 @@ export interface CategoryState {
     filterName: string
     searchName: string
 }
+
 const initialState: CategoryState = {
     name: 'Food',
     filterName: 'All categories',

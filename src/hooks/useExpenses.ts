@@ -1,14 +1,15 @@
 import { useState, useEffect } from "react"
-import { Item, ItemCreated } from '../models'
+import { Item, ItemCreated, Section } from '../models'
 import { useDispatch, useSelector } from "react-redux"
 import { useAppDispatch } from "./useDispatch"
 import { AppStore } from "../redux/store"
-import { saveExpense, setExpenses } from "../redux/states"
+import { saveExpense, setExpenses, updateStats } from "../redux/states"
 import { useMutation } from "@tanstack/react-query"
 import { getExpenses, getExpenseStats } from "../services"
 import { filterItemsByCategory, filterItemsBySearchName, getIndex, replaceItemByIndex } from "../utils"
-import { ExpensesStats } from "../data"
+import { mockExpenseStats } from "../data"
 import { adaptExpense } from "../services/adapters/expenseAdapter"
+import { Stats } from "../models/api/CreateExpenseResponse"
 
 export const useExpenses = () => {
 
@@ -17,9 +18,10 @@ export const useExpenses = () => {
     const searchName = stateCategory.searchName
     const stateExpenses = useSelector((store: AppStore) => store.expenses)
     const expenseItems = stateExpenses.items
-    
+    const expenseStats = stateExpenses.stats
+
     const [items, setItems] = useState<Item[]>(expenseItems)
-    const [stats, setStats] = useState(ExpensesStats)
+    const [stats, setStats] = useState<Section[]>(mockExpenseStats)
     const dispatch = useDispatch()
     const dispatchAsync = useAppDispatch()
 
@@ -28,6 +30,11 @@ export const useExpenses = () => {
         setItems(expenseItems)
     }, [expenseItems])
 
+    useEffect(() => {
+        // update card`s stats after update the store
+        setStats(expenseStats)
+    }, [expenseStats])
+
     const updateItem = (itemModified: Item) => {
         const index = getIndex(expenseItems, itemModified)
         const expensesUpdated = replaceItemByIndex(expenseItems, index, itemModified)
@@ -35,9 +42,9 @@ export const useExpenses = () => {
         setItems(expensesUpdated)
     }
 
-    const createLocalExpense = (data: ItemCreated) => {
+    const createLocalExpense = (data: ItemCreated, stats: Stats) => {
         const newItem = adaptExpense(data)
-        dispatchAsync(saveExpense({ item: newItem, currentItems: expenseItems }))
+        dispatchAsync(saveExpense({ item: newItem, currentItems: expenseItems, stats: stats }))
     }
 
     const getExpensesMutation = useMutation({
@@ -52,14 +59,7 @@ export const useExpenses = () => {
     const getExpensesStatsMutation = useMutation({
         mutationFn: () => getExpenseStats(),
         onSuccess: (response) => {
-            const { highestCategory, total, totalCurrentMonth } = response
-            setStats(prevStats => {
-                const newStats = [...prevStats]
-                newStats[0]['value'] = total
-                newStats[1]['value'] = highestCategory
-                newStats[2]['value'] = totalCurrentMonth
-                return newStats
-            })
+            dispatchAsync(updateStats({ stats: response }))
         },
         onError: () => console.log('error load expenses')
     })

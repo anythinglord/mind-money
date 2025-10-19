@@ -11,7 +11,7 @@ export const Categories: string[] = [
     'All categories', 'Food', 'Credit', 'Services', 'Health', 'General', 'Returns'
 ]
 
-export const ExpensesStats: Section[] = [
+export const mockExpenseStats: Section[] = [
     { name: 'Total Expenses', icon: 'dollar-sign', value: 5000 },
     { name: 'Highest Category', icon: 'pie-chart', value: 'Food' },
     { name: 'Until Today', icon: 'signal', value: 5000 },

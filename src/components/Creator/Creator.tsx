@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { isTrue } from "../../utils";
 import { useMutation } from "@tanstack/react-query";
 import { Item, ItemCreated, ItemToModify } from "../../models";
+import { CreateExpenseResponse } from '../../models/api/CreateExpenseResponse'
 import { createExpense, editExpense } from "../../services";
 import { changeMode, setValitAt } from "../../redux/states";
 import { ContainerCategoriesList, ContainerRecurrenciesList } from "../List";
@@ -62,8 +63,9 @@ export const Creator = () => {
 
     const createNewExpense = useMutation({
         mutationFn: (expense: ItemCreated) => createExpense(expense),
-        onSuccess: (item: ItemCreated) => {
-            createLocalExpense(item)
+        onSuccess: (response: CreateExpenseResponse) => {
+            const { data } = response
+            createLocalExpense(data.item, data.stats)
             // close dialog
             dialogCloseSubject$.setSubject = true;
         },

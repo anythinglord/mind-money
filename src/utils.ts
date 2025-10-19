@@ -1,5 +1,6 @@
 import { Categories } from "./data";
-import { Item, Recurrence } from "./models";
+import { Item, Recurrence, Section} from "./models";
+import { Stats } from "./models/api/CreateExpenseResponse";
 
 export const isTrue = (expression: any) => {
     return expression ? true : false
@@ -85,4 +86,12 @@ export const getCategoriesByMode = (isFilterMode: boolean) => {
 
 export const getRecurrences = () => {
     return Object.values(Recurrence)
+}
+
+export const updateExpenseStats = (currentStats: Section[], stats: Stats) => {
+    const newStats = [...currentStats]
+    newStats[0] = { ...newStats[0], value: stats.total };
+    newStats[1] = { ...newStats[1], value: stats.highestCategory };
+    newStats[2] = { ...newStats[2], value: stats.totalCurrentMonth };
+    return newStats
 }
