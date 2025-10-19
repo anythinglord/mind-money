@@ -92,6 +92,7 @@ export const updateExpenseStats = (currentStats: Section[], stats: Stats) => {
     const newStats = [...currentStats]
     newStats[0] = { ...newStats[0], value: stats.total };
     newStats[1] = { ...newStats[1], value: stats.highestCategory };
-    newStats[2] = { ...newStats[2], value: stats.totalCurrentMonth };
+    newStats[2] = { ...newStats[2], value: stats.untilTodayAmount };
+    newStats[3] = { ...newStats[3], value: stats.selectedAmount };
     return newStats
 }

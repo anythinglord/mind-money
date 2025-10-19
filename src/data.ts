@@ -15,4 +15,5 @@ export const mockExpenseStats: Section[] = [
     { name: 'Total Expenses', icon: 'dollar-sign', value: 5000 },
     { name: 'Highest Category', icon: 'pie-chart', value: 'Food' },
     { name: 'Until Today', icon: 'signal', value: 5000 },
+    { name: 'Selected Expenses', icon: 'object-group', value: 0 },
 ]

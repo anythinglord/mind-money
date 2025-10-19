@@ -7,8 +7,8 @@ const url = config.API_URL
 const activeWorkSpace: string = '67f9274880d73be2ade586aa';
 
 export const getExpenses = async () => {
-    
-    const request = axios.get(`${url}/expenses/${activeWorkSpace}` , {
+
+    const request = axios.get(`${url}/expenses/${activeWorkSpace}`, {
         withCredentials: true
     });
     const [response, error] = await catchError(request)
@@ -20,12 +20,12 @@ export const getExpenses = async () => {
 }
 
 export const createExpense = async (data: ItemCreated) => {
-    
+
     try {
         const response = await axios.post(`${url}/expenses`,
-            { 
-                name: data.name, amount: data.amount, category: data.category, 
-                recurrence: data.recurrence, validAt: data.validAt 
+            {
+                name: data.name, amount: data.amount, category: data.category,
+                recurrence: data.recurrence, validAt: data.validAt
             },
             { withCredentials: true }
         )
@@ -49,10 +49,10 @@ export const editExpense = async (data: ItemToModify) => {
     return response?.data;
 }
 
-export const getExpenseStats = async () => {
-    
-    const request = axios.get(`${url}/expenses/stats/${activeWorkSpace}` , {
-        withCredentials: true
+export const getExpenseStats = async (category: string = '') => {
+
+    const request = axios.get(`${url}/expenses/stats/${activeWorkSpace}`, {
+        params: { category: category }, withCredentials: true
     });
     const [response, error] = await catchError(request)
     if (error) {

@@ -57,7 +57,7 @@ export const useExpenses = () => {
     })
 
     const getExpensesStatsMutation = useMutation({
-        mutationFn: () => getExpenseStats(),
+        mutationFn: (category: string) => getExpenseStats(category),
         onSuccess: (response) => {
             dispatchAsync(updateStats({ stats: response }))
         },
@@ -66,7 +66,7 @@ export const useExpenses = () => {
 
     useEffect(() => {
         getExpensesMutation.mutate()
-        getExpensesStatsMutation.mutate()
+        getExpensesStatsMutation.mutate('')
     }, [])
 
     useEffect(() => {
@@ -86,11 +86,13 @@ export const useExpenses = () => {
         if (filterCategoryName === 'All categories') {
             const itemsFilteredBySearchName = filterItemsBySearchName(expenseItems, searchName)
             setItems(itemsFilteredBySearchName)
+            getExpensesStatsMutation.mutate('')
         } else {
             if (filterCategoryName) {
                 const itemsFilteredByCategory = filterItemsByCategory(expenseItems, filterCategoryName)
                 const itemsFilteredBySearchName = filterItemsBySearchName(itemsFilteredByCategory, searchName)
                 setItems(itemsFilteredBySearchName)
+                getExpensesStatsMutation.mutate(filterCategoryName)
             }
         }
     }, [filterCategoryName])
