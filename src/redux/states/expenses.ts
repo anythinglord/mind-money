@@ -76,7 +76,6 @@ export const expensesSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(saveExpense.fulfilled, (state, action) => {
-                console.log("fullfilled ->", action.payload)
                 state.items = action.payload.newItems;
                 state.stats = action.payload.newStats 
             })

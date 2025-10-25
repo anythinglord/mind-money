@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import RedirectRoute from './RedirectRoute';
-import { LandingPage, HomePage, LoginPage, ExpensesPage, SessionExpired } from '../pages';
+import { LandingPage, HomePage, LoginPage, ExpensesPage, SessionExpired, BudgetPage } from '../pages';
 
 export const AppRoutes = () => {
   return (
@@ -14,6 +14,7 @@ export const AppRoutes = () => {
       <Route path="/" element={<PrivateRoute />} >
         <Route path="home" element={<HomePage />} />
         <Route path="expenses" element={<ExpensesPage />} />
+        <Route path="budget" element={<BudgetPage />} />
       </Route>
     </Routes>
   );

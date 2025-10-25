@@ -12,8 +12,14 @@ export const Categories: string[] = [
 ]
 
 export const mockExpenseStats: Section[] = [
-    { name: 'Total Expenses', icon: 'dollar-sign', value: 5000 },
+    { name: 'Total Expenses', icon: 'money-bills', value: 5000 },
     { name: 'Highest Category', icon: 'pie-chart', value: 'Food' },
     { name: 'Until Today', icon: 'signal', value: 5000 },
     { name: 'Selected Expenses', icon: 'object-group', value: 0 },
+]
+
+export const mockBudgetStats: Section[] = [
+    { name: 'Total Income', icon: 'dollar-sign', value: 5000 },
+    { name: 'Total Expenses', icon: 'money-bills', value: 1000 },
+    { name: 'Total Savings', icon: 'piggy-bank', value: 4000 },
 ]

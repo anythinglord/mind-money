@@ -43,6 +43,12 @@ html, body {
   top: calc(85vh - 2px);
 }
 
+/* PAGES */
+.page-index {
+  background-color: var(--main-bg-yellow);
+  height: 100vh;
+}
+
 .page-content {
   width: 70vw;
   margin: auto;
@@ -96,3 +102,4 @@ html, body {
   width: 100%;
   gap: 50px;
 }
+

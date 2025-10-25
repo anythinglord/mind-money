@@ -13,7 +13,7 @@ export const NavBar = () => {
             </div>
             <div className="navigation">
                 <a onClick={() => navigate('/expenses')} >Expenses</a>
-                <a>Budget</a>
+                <a onClick={() => navigate('/budget')}>Budget</a>
                 <a>Goals</a>
                 <a>Reports</a>
             </div>
