@@ -9,7 +9,6 @@ interface Props {
     value?: string | undefined
     type?: inputType
     label?: string
-    //inputRef?: RefObject<HTMLInputElement>;
     register: UseFormRegister<any>
     error?: boolean
     errorMessage?: string

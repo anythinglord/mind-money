@@ -1,98 +1,50 @@
 import { Button } from "../Button/Button";
 import { Input } from "../Input/Input";
-import { dialogCloseSubject$ } from "../Dialog/Dialog";
-import { AppStore } from "../../redux/store"
-import { useDispatch, useSelector } from "react-redux";
-import { useExpenses } from "../../hooks/useExpenses";
+import { useDispatch } from "react-redux";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { expenseSchema } from "../../schemas/expense.schema";
 import { useForm } from "react-hook-form";
 import { isTrue } from "../../utils";
-import { useMutation } from "@tanstack/react-query";
-import { Item, ItemCreated, ItemToModify } from "../../models";
-import { CreateExpenseResponse } from '../../models/api/CreateExpenseResponse'
-import { createExpense, editExpense } from "../../services";
-import { changeMode, setValitAt } from "../../redux/states";
+import { setValitAt } from "../../redux/states";
 import { ContainerCategoriesList, ContainerRecurrenciesList } from "../List";
 import "./index.css";
+import { ZodObject } from "zod";
+import { ItemToModify } from "../../models";
 
-export const Creator = () => {
+interface Props<T extends ZodObject<any>> {
+    isEditMode: boolean
+    onSubmit: (data: any) => void
+    validationSchema: T
+    currentItem?: ItemToModify
+}
 
-    const stateCategory = useSelector((store: AppStore) => store.category)
-    const stateExpenses = useSelector((store: AppStore) => store.expenses)
-    const stateRecurrence = useSelector((store: AppStore) => store.recurrence)
-    const currentItem = stateExpenses.currentItem
-    const isEditMode = stateExpenses.mode === 'edit'
+export const Creator = <T extends ZodObject<any>>({ isEditMode, onSubmit, validationSchema, currentItem }: Props<T>) => {
+
     const dispatch = useDispatch()
-    const { createLocalExpense, updateItem } = useExpenses(); 
-
     const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: zodResolver(expenseSchema(isEditMode)),
+        resolver: zodResolver(validationSchema),
     });
 
-    const onSubmit = (data: any) => {
-        try {
-            if (isEditMode) {
-                modifyExpense.mutate({
-                    id: currentItem?.id,
-                    name: data.name, amount: data.amount,
-                    category: stateCategory.name
-                })
-            } else {
-                createNewExpense.mutate({ 
-                    name: data.name, amount: data.amount, recurrence: stateRecurrence.name,
-                    validAt: stateRecurrence.validAt, category: stateCategory.name
-                })    
-            }
-        } catch (error) {
-            throw new Error("Error on submit")
-        }
-    }
-
-    const modifyExpense = useMutation({
-        mutationFn: (expense: ItemToModify) => editExpense(expense),
-        onSuccess: (item: Item) => {
-            updateItem(item)
-            // close dialog
-            dialogCloseSubject$.setSubject = true;
-            // change mode to none
-            dispatch(changeMode('none'))
-        },
-        onError: () => alert('Error modifing item'),
-    })
-
-    const createNewExpense = useMutation({
-        mutationFn: (expense: ItemCreated) => createExpense(expense),
-        onSuccess: (response: CreateExpenseResponse) => {
-            const { data } = response
-            createLocalExpense(data.item, data.stats)
-            // close dialog
-            dialogCloseSubject$.setSubject = true;
-        },
-        onError: () => alert('Error creating item'),
-    })
-
-    return(
+    return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div className="creator-index">
                 <div className="creator-content">
                     <div className="group">
                         <div className="row">
-                            <Input label="name" register={register} value={ isEditMode ? currentItem?.name : '' }
-                                error={isTrue(errors.name)}  errorMessage={errors.name?.message} />
-                            <input type="date" className="input-date" onChange={(e) => dispatch(setValitAt(e.target.value))}/>
+                            <Input label="name" register={register} value={isEditMode ? currentItem?.name : ''}
+                                error={isTrue(errors.name)} errorMessage={errors.name?.message?.toString()} />
+                            <input type="date" className="input-date" onChange={(e) => dispatch(setValitAt(e.target.value))} />
                         </div>
                         <div className="row">
-                            <Input label="amount" type="number" register={register} 
-                                value={ isEditMode ? currentItem?.amount : '' }
-                                error={isTrue(errors.amount)}  errorMessage={errors.amount?.message} />
+                            <Input label="amount" type="number" register={register}
+                                value={isEditMode ? currentItem?.amount : ''}
+                                error={isTrue(errors.amount)} errorMessage={errors.amount?.message?.toString()} />
                             <ContainerRecurrenciesList />
                             <ContainerCategoriesList />
                         </div>
                     </div>
                     <Button type="submit" label={isEditMode ? 'Save' : 'Create'} />
                 </div>
-            </div>    
+            </div>
         </form>
     )
 }

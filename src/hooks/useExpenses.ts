@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react"
-import { Item, ItemCreated, Section } from '../models'
+import { Item, ItemCreated, Section, ItemToModify } from '../models'
 import { useDispatch, useSelector } from "react-redux"
+import { dialogCloseSubject$ } from "../components"
 import { useAppDispatch } from "./useDispatch"
 import { AppStore } from "../redux/store"
-import { saveExpense, setExpenses, updateStats } from "../redux/states"
+import { saveExpense, setExpenses, updateStats, changeMode } from "../redux/states"
 import { useMutation } from "@tanstack/react-query"
-import { getExpenses, getExpenseStats } from "../services"
+import { getExpenses, getExpenseStats, createExpense, editExpense } from "../services"
 import { filterItemsByCategory, filterItemsBySearchName, getIndex, replaceItemByIndex } from "../utils"
 import { mockExpenseStats } from "../data"
 import { adaptExpense } from "../services/adapters/expenseAdapter"
-import { Stats } from "../models/api/CreateExpenseResponse"
+import { Stats, CreateExpenseResponse } from "../models/api/CreateExpenseResponse"
 
 export const useExpenses = () => {
 
@@ -64,6 +65,29 @@ export const useExpenses = () => {
         onError: () => console.log('error load expenses')
     })
 
+    const createExpenseMutation = useMutation({
+        mutationFn: (expense: ItemCreated) => createExpense(expense),
+        onSuccess: (response: CreateExpenseResponse) => {
+            const { data } = response
+            createLocalExpense(data.item, data.stats)
+            // close dialog
+            dialogCloseSubject$.setSubject = true;
+        },
+        onError: () => alert('Error creating item'),
+    })
+
+    const modifyExpenseMutation = useMutation({
+        mutationFn: (expense: ItemToModify) => editExpense(expense),
+        onSuccess: (item: Item) => {
+            updateItem(item)
+            // close dialog
+            dialogCloseSubject$.setSubject = true;
+            // change mode to none
+            dispatch(changeMode('none'))
+        },
+        onError: () => alert('Error modifing item'),
+    })
+
     useEffect(() => {
         getExpensesMutation.mutate()
         getExpensesStatsMutation.mutate('')
@@ -101,6 +125,8 @@ export const useExpenses = () => {
         expenses: items,
         stats: stats,
         createLocalExpense: createLocalExpense,
-        updateItem: updateItem
+        updateItem: updateItem,
+        createExpenseMutation: createExpenseMutation,
+        modifyExpenseMutation: modifyExpenseMutation
     }
 }
