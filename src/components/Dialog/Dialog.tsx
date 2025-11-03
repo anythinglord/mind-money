@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux"
 import { changeMode } from "../../redux/states"
 interface Props {
     children: React.ReactNode
-    title: string
+    title?: string
 }
 
 export const dialogOpenSubject$ = new SubjectManager<boolean>();

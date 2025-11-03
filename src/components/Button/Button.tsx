@@ -13,7 +13,7 @@ export const Button = ({ label = 'button', type = "button" , variant = 'containe
             type={type} 
             className={`btn btn-${variant}`} 
             onClick={handleClick}>
-            {label}
+                {label}
         </button>
     )
 }

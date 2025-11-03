@@ -37,7 +37,7 @@ html, body {
   justify-content: center;
 }
 
-.position-end{
+.position-end {
   position: absolute;
   left: calc(80vw - 2px);
   top: calc(85vh - 2px);
@@ -61,6 +61,7 @@ html, body {
   font-weight: 600;
   padding: 15px;
   margin-top: 30px;
+  background-color: #EBF8B8;
 }
 
 .page-subtitle {
@@ -102,4 +103,3 @@ html, body {
   width: 100%;
   gap: 50px;
 }
-
