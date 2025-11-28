@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { categorySlice, CategoryState, ExpenseState, expensesSlice, userSlice, UserState } from "./states";
+import { categorySlice, CategoryState, ExpenseState, expensesSlice, userSlice, UserState, budgetSlice, BudgetState } from "./states";
 import { RecurrenceState, recurrenceSlice } from "./states/recurrence";
 
 export interface AppStore {
     expenses: ExpenseState
     category: CategoryState
     recurrence: RecurrenceState
-    user: UserState    
+    user: UserState
+    budget: BudgetState
 }
 
 export const store = configureStore<AppStore>({
@@ -14,7 +15,8 @@ export const store = configureStore<AppStore>({
         expenses: expensesSlice.reducer,
         category: categorySlice.reducer,
         user: userSlice.reducer,
-        recurrence: recurrenceSlice.reducer
+        recurrence: recurrenceSlice.reducer,
+        budget: budgetSlice.reducer
     }
 })
 

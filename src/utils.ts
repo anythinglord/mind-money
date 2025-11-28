@@ -1,6 +1,6 @@
 import { Categories } from "./data";
 import { Item, Recurrence, Section} from "./models";
-import { Stats } from "./models/api/CreateExpenseResponse";
+import { Stats, BudgetStats } from "./models";
 
 export const isTrue = (expression: any) => {
     return expression ? true : false
@@ -94,5 +94,13 @@ export const updateExpenseStats = (currentStats: Section[], stats: Stats) => {
     newStats[1] = { ...newStats[1], value: stats.highestCategory };
     newStats[2] = { ...newStats[2], value: stats.untilTodayAmount };
     newStats[3] = { ...newStats[3], value: stats.selectedAmount };
+    return newStats
+}
+
+export const updateBudgetStats = (currentStats: Section[], stats: BudgetStats) => {
+    const newStats = [...currentStats]
+    newStats[0] = { ...newStats[0], value: stats.totalIncome };
+    newStats[1] = { ...newStats[1], value: stats.totalExpenses };
+    newStats[2] = { ...newStats[2], value: stats.totalSavings };
     return newStats
 }

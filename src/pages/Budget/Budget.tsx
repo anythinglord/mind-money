@@ -1,5 +1,6 @@
 import { Button } from "../../components/Button"
 import { CardList } from "../../components/CardList"
+import { IncomeCreator } from "../../components/Creator/IncomeCreator"
 import { Dialog, dialogOpenSubject$ } from "../../components/Dialog"
 import { NavBar } from "../../components/NavBar"
 import { useBudget } from "../../hooks/useBudget"
@@ -17,7 +18,7 @@ export const BudgetPage = () => {
         <div className="page-index">
             <NavBar />
             <Dialog title="Create Income">
-                <h2>halli</h2>
+                <IncomeCreator />
             </Dialog>
             <div className="page-content">
                 <div className="budget-header">

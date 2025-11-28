@@ -16,3 +16,4 @@ export interface Item {
 export type ItemCreated = Pick<Item, 'name' | 'amount' | 'category' | 'createdAt'| 'validAt' | 'recurrence'>
 export type ItemToModify = Pick<Item, 'id'| 'category' > & Partial<Pick<Item, 'name' | 'amount'>>
 export type ItemCreatedWithoutCategory = Pick<Item, 'name' | 'amount' >
+export type Income = Pick<Item, 'name' | 'amount' | 'createdAt'| 'validAt' | 'recurrence'>
