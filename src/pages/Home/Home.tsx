@@ -1,12 +1,12 @@
 import { Table } from '../../components/Table';
 import './index.css'
 import { NavBar } from '../../components/NavBar';
-import { CardList } from '../../components/CardList';
+import { CardList } from '../../components';
 import { HomeCardSections } from '../../data';
 
 export const HomePage = () => {
 
-    return(
+    return (
         <div className='index-home'>
             <NavBar />
             <div className="page-content">

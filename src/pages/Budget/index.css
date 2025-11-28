@@ -1,12 +1,18 @@
 .budget-header {
     display: flex;
     justify-content: space-between;
-    
+
 }
 
 .budget-item {
     margin: 0 15px 15px 0;
     display: flex;
     align-items: flex-end;
+    gap: 15px;
+}
+
+.budget-sources {
+    width: 100%;
+    display: flex;
     gap: 15px;
 }

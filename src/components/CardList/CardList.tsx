@@ -1,4 +1,5 @@
 import { Section } from '../../models/interfaces'
+import { Card } from '../Card/Card'
 import './index.css'
 
 interface Props {
@@ -10,15 +11,12 @@ export const CardList = ({ data }: Props) => {
     return (
         <div className='cardl-index'>
             {data.map(({ name, icon, value }, index) => (
-                <div className='card-box' key={index}>
-                    <div className="card-header">
-                        <span>{name}</span>
-                        <i className={`fa-solid fa-${icon}`} />
-                    </div>
-                    <div className="card-value">
-                        {typeof value != 'string' ? '$ ' + value.toLocaleString() : value}
-                    </div>
-                </div>
+                <Card
+                    key={index}
+                    title={name}
+                    icon={icon}
+                    value={value}
+                />
             ))}
         </div>
     )

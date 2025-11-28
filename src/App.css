@@ -1,13 +1,14 @@
 @import "./assets/globals.css";
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  overflow: hidden; 
+  overflow: hidden;
   height: 100vh;
-  font-family: system-ui, sans-serif; 
-  font-family: Georgia, serif; 
-  font-family: Menlo, monospace; 
+  font-family: system-ui, sans-serif;
+  font-family: Georgia, serif;
+  font-family: Menlo, monospace;
 }
 
 .mt-50 {
