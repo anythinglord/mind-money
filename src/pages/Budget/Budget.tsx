@@ -1,3 +1,4 @@
+import { useMemo } from "react"
 import { Button } from "../../components/Button"
 import { Card, CardList } from "../../components"
 import { IncomeCreator } from "../../components/Creator/IncomeCreator"
@@ -8,11 +9,26 @@ import "./index.css"
 
 export const BudgetPage = () => {
 
-    const { stats } = useBudget()
+    const { stats, getQueryIncomes } = useBudget()
+    const { data } = getQueryIncomes
 
     const handleClick = () => {
         dialogOpenSubject$.setSubject = true;
     }
+
+    const Incomes = useMemo(() => {
+        if (!data) return null
+
+        return data.incomes.map((income: any, index: number) => (
+            <Card
+                key={index}
+                title={income.name}
+                date={income.validAt || income.createdAt}
+                value={Number(income.amount)}
+                type="income"
+            />
+        ))
+    }, [data])
 
     return (
         <div className="page-index">
@@ -30,8 +46,7 @@ export const BudgetPage = () => {
                 <CardList data={stats} />
                 <div className="page-title">Income Sources</div>
                 <div className="budget-sources">
-                    <Card title="Salary" date="2025-11-28" value={5000} type="income" />
-                    <Card title="Salary" date="2025-11-28" value={5000} type="income" />
+                    {Incomes}
                 </div>
             </div>
         </div>

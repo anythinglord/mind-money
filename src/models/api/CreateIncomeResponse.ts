@@ -3,10 +3,10 @@ import { Income } from "../item"
 export interface BudgetStats {
     totalIncome: string
     totalExpenses: string
-    totalSavings: string
+    savings: string
 }
 
-interface Data{
+interface Data {
     item: Income
     stats: BudgetStats
 }

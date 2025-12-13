@@ -15,9 +15,10 @@ interface Props<T extends ZodObject<any>> {
     onSubmit: (data: any) => void
     validationSchema: T
     currentItem?: ItemToModify
+    type?: 'income' | 'expense'
 }
 
-export const Creator = <T extends ZodObject<any>>({ isEditMode, onSubmit, validationSchema, currentItem }: Props<T>) => {
+export const Creator = <T extends ZodObject<any>>({ isEditMode, onSubmit, validationSchema, currentItem, type }: Props<T>) => {
 
     const dispatch = useDispatch()
     const { register, handleSubmit, formState: { errors } } = useForm({
@@ -39,7 +40,7 @@ export const Creator = <T extends ZodObject<any>>({ isEditMode, onSubmit, valida
                                 value={isEditMode ? currentItem?.amount : ''}
                                 error={isTrue(errors.amount)} errorMessage={errors.amount?.message?.toString()} />
                             <ContainerRecurrenciesList />
-                            <ContainerCategoriesList />
+                            {type === 'expense' && <ContainerCategoriesList />}
                         </div>
                     </div>
                     <Button type="submit" label={isEditMode ? 'Save' : 'Create'} />

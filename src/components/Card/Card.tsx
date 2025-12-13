@@ -1,3 +1,4 @@
+import { formatDate } from '../../utils'
 import './index.css'
 
 interface Props {
@@ -15,7 +16,7 @@ export const Card = ({ title, date, value, type = 'default', icon = 'dollar-sign
             <div className="card-header">
                 <div className="card-title-section">
                     <span className="card-title">{title}</span>
-                    {date && <span className="card-date">{date}</span>}
+                    {date && <span className="card-date">{formatDate(date)}</span>}
                 </div>
                 <i className={`fa-solid fa-${icon} card-icon`} />
             </div>

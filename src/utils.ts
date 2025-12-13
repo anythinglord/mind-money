@@ -1,5 +1,5 @@
 import { Categories } from "./data";
-import { Item, Recurrence, Section} from "./models";
+import { Item, Recurrence, Section } from "./models";
 import { Stats, BudgetStats } from "./models";
 
 export const isTrue = (expression: any) => {
@@ -7,10 +7,10 @@ export const isTrue = (expression: any) => {
 }
 
 export const formatDate = (date: string | undefined) => {
-    return date?.slice(0,10)
+    return date?.slice(0, 10)
 }
 
-export const capitalize = (val: string) => 
+export const capitalize = (val: string) =>
     String(val).charAt(0).toUpperCase() + String(val).slice(1);
 
 export const concatWithExclude = (exclude: string, data: any[]) => {
@@ -50,7 +50,7 @@ export const filterItemsByCategory = (items: Item[], category: string) => {
  */
 
 export const filterItemsBySearchName = (items: Item[], searchName: string) => {
-    if (searchName === ''){
+    if (searchName === '') {
         return items
     }
     const filteredItems = [...items]
@@ -101,6 +101,6 @@ export const updateBudgetStats = (currentStats: Section[], stats: BudgetStats) =
     const newStats = [...currentStats]
     newStats[0] = { ...newStats[0], value: stats.totalIncome };
     newStats[1] = { ...newStats[1], value: stats.totalExpenses };
-    newStats[2] = { ...newStats[2], value: stats.totalSavings };
+    newStats[2] = { ...newStats[2], value: stats.savings };
     return newStats
 }

@@ -1,40 +1,59 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { mockBudgetStats } from '../data'
-import { useMutation } from "@tanstack/react-query"
-import { createIncome } from "../services/budget.service"
-import { BudgetStats, Income } from "../models"
-import { CreateIncomeResponse } from "../models"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { createIncome, getBudgetStats, getIncomes } from "../services/budget.service"
+import { Income } from "../models"
 import { AppStore } from "../redux/store"
-import { adaptIncome } from "../services/adapters/incomeAdapter"
-import { useAppDispatch } from "./useDispatch"
-import { saveIncome } from "../redux/states/budget"
 import { useSelector } from "react-redux"
 import { dialogCloseSubject$ } from "../components"
+import { updateBudgetStats } from "../utils"
 
 export const useBudget = () => {
-    const [stats, _] = useState(mockBudgetStats)
-    const stateExpenses = useSelector((store: AppStore) => store.expenses)
-    const expenseItems = stateExpenses.items
-    const dispatchAsync = useAppDispatch()
 
-    const createLocalIncome = (data: Income, stats: BudgetStats) => {
-        const newItem = adaptIncome(data)
-        dispatchAsync(saveIncome({ item: newItem, currentItems: expenseItems, stats: stats }))
-    }
+    const queryClient = useQueryClient()
+    const [stats, setStats] = useState(mockBudgetStats)
+    const stateBudget = useSelector((store: AppStore) => store.budget)
+    const incomeItems = stateBudget.items
+
+    const { data: statsData } = useQuery({
+        queryKey: ['stats'],
+        queryFn: getBudgetStats,
+        enabled: true
+    })
+
+    useEffect(() => {
+        if (statsData) {
+            console.log('statsData called:', statsData, updateBudgetStats(mockBudgetStats, statsData))
+            setStats(updateBudgetStats(mockBudgetStats, statsData))
+        }
+    }, [statsData])
 
     const createIncomeMutation = useMutation({
         mutationFn: (income: Income) => createIncome(income),
-        onSuccess: (response: CreateIncomeResponse) => {
-            const { data } = response
-            createLocalIncome(data.item, data.stats)
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ['incomes'] })
             // close dialog
             dialogCloseSubject$.setSubject = true;
         },
         onError: () => alert('Error creating item'),
     })
 
+    const getQueryIncomes = useQuery({
+        queryKey: ['incomes'],
+        queryFn: getIncomes,
+        enabled: true
+    })
+
+    useEffect(() => {
+        if (getQueryIncomes.isSuccess && getQueryIncomes.data) {
+            console.log('getIncomes called:', getQueryIncomes.data)
+        }
+    }, [getQueryIncomes.isSuccess, getQueryIncomes.data])
+
     return {
         stats: stats,
-        createIncomeMutation: createIncomeMutation
+        incomes: incomeItems,
+        createIncomeMutation: createIncomeMutation,
+        getQueryIncomes: getQueryIncomes,
     }
 }
